@@ -1,24 +1,7 @@
-"use client";
+import dynamic from 'next/dynamic';
 
-import { useMemo } from "react";
-import StarField from "./StarField";
-import { Interaction } from "./Interaction";
+const PixiComponent = dynamic(() => import('../hik/MenuStage'), { ssr: false });
 
-import { BlurFilter } from "pixi.js";
-import { Stage } from "@pixi/react";
-
-export default function Hik() {
-  const blurFilter = useMemo(() => new BlurFilter(2), []);
-
-  return (
-    <Stage width={window.innerWidth} height={window.innerHeight}>
-      <StarField />
-      <Interaction
-        x={window.innerWidth / 2}
-        y={window.innerHeight / 2}
-        songName="first"
-        songPath="crab/crab_harp_trim.wav"
-      ></Interaction>
-    </Stage>
-  );
+export default function MenuStage() {
+  return <PixiComponent />;
 }
