@@ -18,8 +18,28 @@ function CrabInteractiveChapter() {
   const [sulfurButtonClicked, setSulfurButtonClicked] = useState(false);
   const [synchrotronButtonClicked, setSynchrotronButtonClicked] =
     useState(false);
+  const [allButtonsClicked, setAllButtonsClicked] = useState([
+    false,
+    false,
+    false,
+  ]);
 
-  const handleButtonClick = () => {
+  const updateButtonClicked = (index: number) => {
+    setAllButtonsClicked((prev) => {
+      const newButtonsClicked = [...prev];
+      newButtonsClicked[index] = true;
+      return newButtonsClicked;
+    });
+  };
+
+  const handleButtonClick = (text: string) => {
+    if (text === "DUST") {
+      updateButtonClicked(0);
+    } else if (text === "IONIZED SULFUR") {
+      updateButtonClicked(1);
+    } else if (text === "SYNCHROTRON") {
+      updateButtonClicked(2);
+    }
     setDustButtonClicked(false);
     setSulfurButtonClicked(false);
     setSynchrotronButtonClicked(false);
@@ -38,7 +58,7 @@ function CrabInteractiveChapter() {
     return (
       <button
         onClick={() => {
-          handleButtonClick();
+          handleButtonClick(text);
           setClicked(!clicked);
         }}
         className={`hover:underline flex-1 text-center ${
@@ -68,10 +88,26 @@ function CrabInteractiveChapter() {
         alt="Fullscreen background image"
         className="absolute inset-0 w-full h-full object-cover"
       />
+      {allButtonsClicked.every((button) => button) && (
+        <div className="absolute inset-0 flex items-start justify-end text-[#ECECEC]">
+          <div className="w-full h-1/3 bg-gradient-to-b from-[rgba(0,0,0,0.8)] via-[rgba(0,0,0,0.5)] to-transparent flex items-start justify-center px-16 py-8">
+            <div className="w-full flex justify-end font-alata text-2xl">
+              <button
+                onClick={() => {
+                  console.log("NEXT ADVENTURE clicked");
+                }}
+                className="hover:underline"
+              >
+                NEXT ADVENTURE
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="absolute inset-0 flex items-end justify-center text-[#ECECEC]">
         <div className="w-full h-1/3 bg-gradient-to-t from-[rgba(0,0,0,0.8)] via-[rgba(0,0,0,0.5)] to-transparent flex items-end justify-center px-16 py-8">
           <div className="text-center</div> w-full">
-            <div className="flex justify-between w-full text-4xl font-alata">
+            <div className="flex justify-between w-full text-2xl font-alata">
               <ElementButton
                 text="DUST"
                 color="#CA5A8D"
