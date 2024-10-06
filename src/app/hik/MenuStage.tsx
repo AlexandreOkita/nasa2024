@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import StarField from "./StarField";
 import { Interaction } from "./Interaction";
 import { Stage } from "@pixi/react";
 import { BlurFilter } from "pixi.js";
+import { sound } from "@pixi/sound";
 import LessonChapter from "@/components/ui/lessonChapter";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { text } from "stream/consumers";
@@ -71,6 +72,17 @@ export default function MenuStage() {
   const transition = () => {
     setSpeed(1);
   }
+
+  useEffect(() => {
+    if (Number(localStorage.getItem("stage")) == 3) {
+      sound.add("final", {
+        url: "musica_nasa.wav", // Add your sound file here
+        loop: true, // Set sound to loop
+        preload: true,
+      });
+      sound.play("final");
+    }
+  })
 
   return (
     <>
