@@ -8,16 +8,19 @@ import { Container, useTick } from "@pixi/react";
 const starAmount = 800;
 const spread = 50;
 
-export default function StarField() {
+interface StarFieldProps {
+    speed: number;  // Ensure speed is defined as a number
+}
+
+export default function StarField({ speed }: StarFieldProps) {
   const [cameraZ, setCameraZ] = useState(0);
   const [stars, setStars] = useState<StarParameters[]>([]);
 
   useTick((delta) => {
-    setCameraZ(cameraZ + delta * 10 * 0.025);
+    setCameraZ(cameraZ + delta * 10 * speed);
   });
 
   useMemo(() => {
-    console.log("initalizing")
     let createdStars: StarParameters[] = [];
     for (let i = 0; i < starAmount; i++) {
       const deg = Math.random() * Math.PI * 2;
@@ -26,7 +29,7 @@ export default function StarField() {
         initialPosX: Math.cos(deg) * distance,
         initialPosY: Math.sin(deg) * distance,
         initialPosZ: Math.random() * 2000,
-        baseSpeed: 0,
+        baseSpeed: speed,
         starBaseSize: 0.05,
         starStretch: 5,
         screenWidth: window.innerWidth,
@@ -44,8 +47,8 @@ export default function StarField() {
     const newStar = {
         initialPosX: Math.cos(deg) * distance,
         initialPosY: Math.sin(deg) * distance,
-        initialPosZ: cameraZ + 2000,
-        baseSpeed: 0,
+        initialPosZ: cameraZ + Math.random() * 1000 + 2000,
+        baseSpeed: speed,
         starBaseSize: 0.05,
         starStretch: 5,
         screenWidth: window.innerWidth,
@@ -68,7 +71,7 @@ export default function StarField() {
           initialPosX={star.initialPosX}
           initialPosY={star.initialPosY}
           initialPosZ={star.initialPosZ}
-          baseSpeed={star.baseSpeed}
+          baseSpeed={speed}
           starBaseSize={star.starBaseSize}
           starStretch={star.starStretch}
           screenWidth={star.screenWidth}

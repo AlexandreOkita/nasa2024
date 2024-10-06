@@ -11,7 +11,7 @@ export type StarParameters = {
   initialPosX: number;
   initialPosY: number;
   initialPosZ: number;
-  baseSpeed?: number;
+  baseSpeed: number;
   starBaseSize: number;
   starStretch: number;
   screenWidth: number;
@@ -20,10 +20,9 @@ export type StarParameters = {
   onRecycle: () => void;
 };
 
-export function Star(parameters: StarParameters) {
+export function Star(parameters: StarParameters) {  
   const [x, setX] = useState(parameters.initialPosX);
   const [y, setY] = useState(parameters.initialPosY);
-  const [speed, setSpeed] = useState(parameters.baseSpeed || 0);
   const [alpha, setAlpha] = useState(1);
   const [flickerPhase] = useState(Math.random() * Math.PI * 2);
 
@@ -32,7 +31,6 @@ export function Star(parameters: StarParameters) {
 
     if (newZ < 0) {
       parameters.onRecycle();  // Call the recycling callback
-      console.log(`killing ${newZ} ${parameters.initialPosZ} ${parameters.cameraZ}`);
       return;  // Exit early to avoid further calculations
     }
     setX(
@@ -52,7 +50,6 @@ export function Star(parameters: StarParameters) {
   const dyCenter = y - parameters.screenHeight / 2;
   const distanceCenter = Math.sqrt(dxCenter * dxCenter + dyCenter * dyCenter);
   const distanceScale = Math.max(0, (2000 - (parameters.initialPosZ - parameters.cameraZ)) / 2000);
-  console.log(distanceScale)
 
   return (
     <Sprite
@@ -64,7 +61,7 @@ export function Star(parameters: StarParameters) {
         x: distanceScale * parameters.starBaseSize,
         y:
           distanceScale * parameters.starBaseSize + 
-          (distanceScale * speed * parameters.starStretch * distanceCenter) /
+          (distanceScale * parameters.baseSpeed * parameters.starStretch * distanceCenter) /
             parameters.screenWidth,
       }}
       rotation={Math.atan2(dyCenter, dxCenter) + Math.PI / 2}
