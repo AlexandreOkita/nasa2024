@@ -85,6 +85,7 @@ export function Interaction(parameters: PoIParameters) {
       }}
       scale={scaleMultiplier}
       interactive={true}
+      onclick={() => window.location.replace("/cliff")}
       pointerover={handleMouseEnter}
       pointerout={handleMouseLeave}
     />
