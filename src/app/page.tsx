@@ -7,8 +7,9 @@ import LessonChapter from "../components/ui/lessonChapter";
 
 export default function Home() {
   const lessons = [
-    "20 de Janeiro de 2040",
-    "Após 18 anos de trabalho incansável e inúmeras contribuições para a ciência, James Webb está encerrando suas atividades e terá seu merecido descanso no silêncio do universo.",
+    "January 20, 2040",
+    "After 18 years of tireless work and countless contributions to science, James Webb is ending its mission and will receive its well-deserved rest amidst the apparent silence of the universe.",
+    "To remember and celebrate its work, let’s listen to some of its first notes.",
   ];
 
   const [lessonStarted, setLessonStarted] = useState(false);
@@ -25,7 +26,10 @@ export default function Home() {
 
   useEffect(() => {
     const setClickState = () => {
-      if (clickQtt < lessons.length) {
+      if (clickQtt === 2) {
+        window.location.replace("/hik");
+      }
+      if (clickQtt < lessons.length && clickQtt < 2) {
         setClickQtt((prev) => prev + 1);
       }
     };
@@ -47,8 +51,13 @@ export default function Home() {
       document.removeEventListener("click", handleClick);
     };
   }, [clickable]);
+
+  console.log("clickQtt ==>", clickQtt);
   return (
-    <div className="flex h-screen items-center justify-center w-full flex-col px-4 font-mono bg-slate-950 text-white">
+    <div
+      className="flex h-screen items-center justify-center w-full flex-col px-4 font-mono bg-slate-950 text-white"
+      onClick={() => setLessonStarted(true)}
+    >
       <div className="flex flex-col items-center">
         {!lessonStarted ? (
           <div className="flex flex-col items-center">
@@ -61,15 +70,9 @@ export default function Home() {
             <p className="mb-2 font-squadaone text-6xl">
               THE UNIVERSE SYMPHONY
             </p>
-            <button
-              className="mt-2 px-4 py-2 border rounded-lg font-alata"
-              onClick={() => {
-                // console.log("Click qtt", clickQtt);
-                setLessonStarted(true);
-              }}
-            >
-              START
-            </button>
+            <div className="mt-2 px-4 py-2 font-alata text-[#A9A5A5]">
+              TAP TO START
+            </div>
           </div>
         ) : (
           <LessonChapter
@@ -77,14 +80,14 @@ export default function Home() {
             clickable={clickable}
             lessons={lessons}
             imgComponent={
-                <div className="flex flex-col items-center justify-center h-full">
+              <div className="flex flex-col items-center justify-center h-full">
                 <img
                   src="/james_mirror.png"
                   alt="James webb mirror"
                   className="mb-4"
                   style={{ height: "50vh" }}
                 />
-                </div>
+              </div>
             }
             hideContinue={clickQtt >= lessons.length}
           />
