@@ -32,7 +32,7 @@ export function Star(parameters: StarParameters) {
 
     if (newZ < 0) {
       parameters.onRecycle();  // Call the recycling callback
-      console.log(`killing ${newZ} ${parameters.initialPosZ} ${parameters.cameraZ}`);
+      // console.log(`killing ${newZ} ${parameters.initialPosZ} ${parameters.cameraZ}`);
       return;  // Exit early to avoid further calculations
     }
     setX(
@@ -52,7 +52,7 @@ export function Star(parameters: StarParameters) {
   const dyCenter = y - parameters.screenHeight / 2;
   const distanceCenter = Math.sqrt(dxCenter * dxCenter + dyCenter * dyCenter);
   const distanceScale = Math.max(0, (2000 - (parameters.initialPosZ - parameters.cameraZ)) / 2000);
-  console.log(distanceScale)
+  // console.log(distanceScale)
 
   return (
     <Sprite

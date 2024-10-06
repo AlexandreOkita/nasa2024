@@ -46,7 +46,7 @@ const buildInteractions = (currentLevel: number) => {
       y={mapCoordinateY(set.y)}
       songName={set.songName}
       songPath={set.songPath}
-      isEnabled={currentLevel >= index+1} // enable if currentLevel is greater or equal
+      isEnabled={index <= currentLevel} // enable if currentLevel is greater or equal
       miniGamePage={set.miniGamePage}
     />
   ));
@@ -55,12 +55,9 @@ const buildInteractions = (currentLevel: number) => {
 }
 
 export default function MenuStage() {
-  const [currentLevel, setCurrentLevel] = useState(2); // track current level
-  const blurFilter = useMemo(() => new BlurFilter(2), []);
+  const currentLevel = Number(localStorage.getItem("stage"))
 
-  const increaseLevel = () => {
-    setCurrentLevel((prevLevel) => Math.min(prevLevel+1, 4));
-  };
+  const blurFilter = useMemo(() => new BlurFilter(2), []);
 
   return (
     <>

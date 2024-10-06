@@ -1,4 +1,4 @@
-"use-client";
+"use client";
 
 import { useState, useEffect, useRef } from "react";
 
@@ -15,7 +15,7 @@ export type PoIParameters = {
 };
 
 export function Interaction(parameters: PoIParameters) {
-  const [scaleMultiplier, setScaleMultiplier] = useState(1);
+  const [scaleMultiplier, setScaleMultiplier] = useState(1.5);
 
   const fadeInterval = 500; // Duration for fade (in ms)
   const fadeInProgress = useRef(false); // To track if fade-in is in progress
@@ -54,7 +54,7 @@ export function Interaction(parameters: PoIParameters) {
   const handleMouseEnter = () => {
     if (!parameters.isEnabled) return;
 
-    setScaleMultiplier(1.5); // Scale up on hover
+    setScaleMultiplier(3); // Scale up on hover
     // sound.play(parameters.songName);
 
     if (fadeOutProgress.current) {
@@ -69,7 +69,7 @@ export function Interaction(parameters: PoIParameters) {
   const handleMouseLeave = () => {
     if (!parameters.isEnabled) return;
 
-    setScaleMultiplier(1); // Reset scale when not hovering
+    setScaleMultiplier(1.5); // Reset scale when not hovering
     // sound.stop(parameters.songName);
 
     if (fadeInProgress.current) {
@@ -97,8 +97,7 @@ export function Interaction(parameters: PoIParameters) {
         y: 0.5,
       }}
       scale={scaleMultiplier}
-      interactive={true}
-      onclick={() => window.location.replace("/cliff")}
+      interactive={parameters.isEnabled}
       pointerover={handleMouseEnter}
       pointerout={handleMouseLeave}
       pointertap={handleClick} // Handle click event for redirection

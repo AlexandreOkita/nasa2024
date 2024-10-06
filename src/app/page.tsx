@@ -64,7 +64,7 @@ export default function Home() {
             <button
               className="mt-2 px-4 py-2 border rounded-lg font-alata"
               onClick={() => {
-                console.log("Click qtt", clickQtt);
+                // console.log("Click qtt", clickQtt);
                 setLessonStarted(true);
               }}
             >

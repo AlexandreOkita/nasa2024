@@ -17,7 +17,7 @@ export default function StarField() {
   });
 
   useMemo(() => {
-    console.log("initalizing")
+    // console.log("initalizing")
     let createdStars: StarParameters[] = [];
     for (let i = 0; i < starAmount; i++) {
       const deg = Math.random() * Math.PI * 2;

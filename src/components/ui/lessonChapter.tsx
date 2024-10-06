@@ -18,9 +18,9 @@ export default function LessonChapter({
   imgComponent?: ReactNode;
   hideContinue?: boolean;
 }) {
-  console.log("currentClickQtt", currentClickQtt);
-  console.log("lessons", lessons);
-  console.log("text", text);
+  // console.log("currentClickQtt", currentClickQtt);
+  // console.log("lessons", lessons);
+  // console.log("text", text);
   return (
     <div className="relative w-screen h-screen overflow-hidden">
       {imgComponent}
