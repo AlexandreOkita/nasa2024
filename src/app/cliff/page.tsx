@@ -18,8 +18,8 @@ function RenderCompare() {
   return (
     <div className="absolute inset-0 w-full h-full object-cover">
       <Compare
-        firstImage="cliff/cliff-hubble-site.webp"
-        secondImage="cliff/cliff-jw-site.webp"
+        firstImage="cliff/cliff-jw-site.webp"
+        secondImage="cliff/cliff-hubble-site.webp"
         firstImageClassName="object-cover object-left-top"
         secondImageClassname="object-cover object-left-top"
         className="h-screen w-screen"
