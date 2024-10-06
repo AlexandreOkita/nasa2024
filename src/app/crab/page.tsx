@@ -60,9 +60,7 @@ export default function Page() {
       ) : clickQtt <= lessons.length ? (
         <CrabLessonChapter currentClickQtt={clickQtt} />
       ) : (
-        <div className="text-center text-4xl text-[#ECECEC]">
-          Some other text
-        </div>
+        <CrabLessonChapter currentClickQtt={clickQtt - 3} />
       )}
     </div>
   );
