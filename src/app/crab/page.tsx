@@ -210,7 +210,9 @@ export default function Page() {
             <div className="w-full absolute flex z-50 justify-end font-alata text-2xl text-[#ECECEC] mt-4 pr-6">
               <button
                 onClick={() => {
-                  localStorage.setItem("stage", "3");
+                  const currentLevel = Number(localStorage.getItem("stage"));
+                  if (currentLevel < 3)
+                    localStorage.setItem("stage", "3");
                   window.location.replace("/hik");
                 }}
                 className="hover:underline"

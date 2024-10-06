@@ -89,6 +89,8 @@ export default function Page() {
             <div className="w-full absolute flex z-50 justify-end font-alata text-2xl text-[#ECECEC] mt-4 pr-6">
               <button
                 onClick={() => {
+                  const currentLevel = Number(localStorage.getItem("stage"));
+                  if (currentLevel < 1)
                   localStorage.setItem("stage", "1");
                   window.location.replace("/hik");
                 }}
