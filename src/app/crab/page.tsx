@@ -5,7 +5,6 @@ import StartChapter from "@/components/ui/startChapter";
 import { motion } from "framer-motion";
 import { ChevronDown, ChevronsRight } from "lucide-react";
 import LessonChapter from "@/components/ui/lessonChapter";
-import BackgroundMusic from "../../components/backgroundMusic";
 
 const lessons = [
   "A very strange light was visible on the earthling sky. What was mistaken by a “guest star” it was indeed the supernova that originated this remarkable nebula",
