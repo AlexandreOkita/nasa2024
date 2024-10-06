@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import StarField from "./StarField";
 import { Interaction } from "./Interaction";
 import { Stage } from "@pixi/react";
+import { BlurFilter } from "pixi.js";
 
 const gridSetting = {
   rows: 6,
@@ -55,6 +56,7 @@ const buildInteractions = (currentLevel: number) => {
 
 export default function MenuStage() {
   const [speed, setSpeed] = useState(0.025)
+  const blurFilter = useMemo(() => new BlurFilter(2), []);
 
   const transition = () => {
     setSpeed(1);
@@ -68,7 +70,7 @@ export default function MenuStage() {
   return (
     <>
       <Stage width={window.innerWidth} height={window.innerHeight}>
-        <StarField  speed={speed} />
+        <StarField speed={speed} />
         {buildInteractions(currentLevel)}
       </Stage>
     </>
