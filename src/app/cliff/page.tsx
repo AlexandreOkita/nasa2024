@@ -82,7 +82,8 @@ export default function Page() {
             <div className="w-full absolute flex z-50 justify-end font-alata text-2xl text-[#ECECEC] mt-4 pr-6">
               <button
                 onClick={() => {
-                  console.log("NEXT ADVENTURE clicked");
+                  localStorage.setItem("stage", "1");
+                  window.location.replace("/hik");
                 }}
                 className="hover:underline"
               >
