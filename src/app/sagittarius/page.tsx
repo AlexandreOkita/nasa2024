@@ -25,7 +25,7 @@ export default function Page() {
   const [clickQtt, setClickQtt] = useState(0);
   const [clickable, setClickable] = useState(false);
   const [text, setText] = useState("");
-  const [quantity, setQuantity] = useState(5);
+  const [quantity, setQuantity] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -139,7 +139,7 @@ export default function Page() {
                         >
                           <ChevronsLeft size={32} />
                         </button>
-                        <div>{quantity}</div>
+                        <div>{5 * 10 ** quantity}</div>
                         <button
                           type="button"
                           onClick={() => setQuantity(quantity + 1)}
