@@ -5,6 +5,8 @@ import { useState, useEffect, useRef } from "react";
 import { Sprite, useTick } from "@pixi/react";
 import { sound } from "@pixi/sound";
 
+const initialScale = 0.4
+
 export type PoIParameters = {
   x: number;
   y: number;
@@ -15,7 +17,7 @@ export type PoIParameters = {
 };
 
 export function Interaction(parameters: PoIParameters) {
-  const [scaleMultiplier, setScaleMultiplier] = useState(1.5);
+  const [scaleMultiplier, setScaleMultiplier] = useState(initialScale);
 
   // const fadeInterval = 500; // Duration for fade (in ms)
   // const fadeInProgress = useRef(false); // To track if fade-in is in progress
@@ -54,7 +56,7 @@ export function Interaction(parameters: PoIParameters) {
   const handleMouseEnter = () => {
     if (!parameters.isEnabled) return;
 
-    setScaleMultiplier(3); // Scale up on hover
+    setScaleMultiplier(initialScale * 1.5); // Scale up on hover
     sound.play(parameters.songName);
 
     // if (fadeOutProgress.current) {
@@ -69,7 +71,7 @@ export function Interaction(parameters: PoIParameters) {
   const handleMouseLeave = () => {
     if (!parameters.isEnabled) return;
 
-    setScaleMultiplier(1.5); // Reset scale when not hovering
+    setScaleMultiplier(initialScale); // Reset scale when not hovering
     sound.stop(parameters.songName);
 
     // if (fadeInProgress.current) {
