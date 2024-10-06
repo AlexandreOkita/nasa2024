@@ -18,15 +18,12 @@ export default function LessonChapter({
   imgComponent?: ReactNode;
   hideContinue?: boolean;
 }) {
-  // console.log("currentClickQtt", currentClickQtt);
-  // console.log("lessons", lessons);
-  // console.log("text", text);
   return (
     <div className="relative w-screen h-screen overflow-hidden">
       {imgComponent}
       <div className="absolute inset-0 flex items-end justify-center text-[#ECECEC]">
-        <div className="z-20 w-full h-auto bg-gradient-to-t from-[rgba(0,0,0,0.8)] via-[rgba(0,0,0,0.5)] to-transparent flex items-end justify-center px-16 pb-8">
-          <div className="text-center">
+        <div className="z-20 w-full h-auto bg-gradient-to-t from-[rgba(0,0,0,0.8)] via-[rgba(0,0,0,0.5)] to-transparent flex items-end justify-center px-16 pb-16">
+          <div className="text-center pb-4"> {/* Added bottom padding here */}
             <TextGenerateEffect words={text || lessons[currentClickQtt - 1]} />
           </div>
         </div>
