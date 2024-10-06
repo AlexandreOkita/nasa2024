@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect, ReactNode } from "react";
-import { TextGenerateEffect } from "../../components/ui/text-generate-effect";
+import { useState, useEffect, ReactNode, useRef } from "react";
 import StartChapter from "@/components/ui/startChapter";
 import { motion } from "framer-motion";
 import { ChevronDown, ChevronsRight } from "lucide-react";
@@ -147,6 +146,7 @@ function CrabInteractiveChapter({ setRenderNext }: Props) {
 export default function Page() {
   const [clickQtt, setClickQtt] = useState(0);
   const [clickable, setClickable] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [renderNext, setRenderNext] = useState(false);
 
   useEffect(() => {
@@ -160,6 +160,11 @@ export default function Page() {
   useEffect(() => {
     const handleClick = () => {
       if (clickable) {
+        if (audioRef.current && clickQtt === 0) {
+          audioRef.current.play().catch((error) => {
+            console.error("Failed to play audio:", error);
+          });
+        }
         setClickQtt((prev) => prev + 1);
         setClickable(false);
         const timer = setTimeout(() => {
@@ -179,6 +184,7 @@ export default function Page() {
 
   return (
     <div onClick={() => setClickQtt(clickQtt)}>
+      <audio ref={audioRef} src="/crab/crab_harp_trim.wav" />
       {clickQtt === 0 ? (
         <StartChapter
           chapterNumber="III"
