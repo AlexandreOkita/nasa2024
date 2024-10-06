@@ -1,13 +1,15 @@
-import { useState, useEffect, useRef } from 'react';
+"use-client";
 
-import { Sprite, useTick } from '@pixi/react';
-import { sound } from '@pixi/sound';
+import { useState, useEffect, useRef } from "react";
+
+import { Sprite, useTick } from "@pixi/react";
+import { sound } from "@pixi/sound";
 
 export type PoIParameters = {
-  x: number,
-  y: number,
-  songName: string,
-  songPath: string
+  x: number;
+  y: number;
+  songName: string;
+  songPath: string;
 };
 
 export function Interaction(parameters: PoIParameters) {
@@ -21,7 +23,7 @@ export function Interaction(parameters: PoIParameters) {
     sound.add(parameters.songName, {
       url: parameters.songPath, // Add your sound file here
       loop: true, // Set sound to loop
-      preload: true
+      preload: true,
     });
   }, []);
 
@@ -32,7 +34,8 @@ export function Interaction(parameters: PoIParameters) {
     function updateVolume() {
       const elapsed = performance.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      const newVolume = initialVolume + (targetVolume - initialVolume) * progress;
+      const newVolume =
+        initialVolume + (targetVolume - initialVolume) * progress;
 
       sound.volume(parameters.songName, newVolume);
 
@@ -71,19 +74,19 @@ export function Interaction(parameters: PoIParameters) {
     fadeSound(0, fadeInterval);
   };
 
-  return(
+  return (
     <Sprite
-      image={'ClickableStar.png'}
+      image={"ClickableStar.png"}
       x={parameters.x}
       y={parameters.y}
       anchor={{
         x: 0.5,
-        y: 0.5
+        y: 0.5,
       }}
       scale={scaleMultiplier}
       interactive={true}
       pointerover={handleMouseEnter}
       pointerout={handleMouseLeave}
     />
-  )
+  );
 }

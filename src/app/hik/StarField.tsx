@@ -1,20 +1,18 @@
 "use client";
 
-import { useMemo, useState } from 'react';
-import { Star, StarParameters } from './Star'
-import { Interaction } from './Interaction'
+import { useMemo, useState } from "react";
+import { Star, StarParameters } from "./Star";
 
-import { BlurFilter, TextStyle } from 'pixi.js';
-import { Stage, Container, Sprite, Text, useTick } from '@pixi/react';
+import { Container, useTick } from "@pixi/react";
 
 const starAmount = 800;
 const spread = 50;
 
 export default function StarField() {
-  const [cameraZ, setCameraZ] = useState(0)
+  const [cameraZ, setCameraZ] = useState(0);
 
-  useTick(delta =>{
-    setCameraZ(delta * 10 * 0.025)
+  useTick((delta) => {
+    setCameraZ(delta * 10 * 0.025);
   });
 
   const stars = useMemo(() => {
@@ -31,19 +29,28 @@ export default function StarField() {
         starStretch: 5,
         screenWidth: window.innerWidth,
         screenHeight: window.innerHeight,
-        cameraZ: 0
+        cameraZ: 0,
       });
     }
     return createdStars;
-  }, [])
+  }, []);
 
   return (
     <Container>
       {stars.map((star, index) => (
-        <Star key={index} initialPosX={star.initialPosX} initialPosY={star.initialPosY} initialPosZ={star.initialPosZ} baseSpeed={star.baseSpeed} 
-        starBaseSize={star.starBaseSize} starStretch={star.starStretch} screenWidth={star.screenWidth} screenHeight={star.screenHeight}
-        cameraZ={cameraZ} />
+        <Star
+          key={index}
+          initialPosX={star.initialPosX}
+          initialPosY={star.initialPosY}
+          initialPosZ={star.initialPosZ}
+          baseSpeed={star.baseSpeed}
+          starBaseSize={star.starBaseSize}
+          starStretch={star.starStretch}
+          screenWidth={star.screenWidth}
+          screenHeight={star.screenHeight}
+          cameraZ={cameraZ}
+        />
       ))}
     </Container>
   );
-};
+}
