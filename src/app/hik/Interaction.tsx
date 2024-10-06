@@ -17,9 +17,9 @@ export type PoIParameters = {
 export function Interaction(parameters: PoIParameters) {
   const [scaleMultiplier, setScaleMultiplier] = useState(1.5);
 
-  const fadeInterval = 500; // Duration for fade (in ms)
-  const fadeInProgress = useRef(false); // To track if fade-in is in progress
-  const fadeOutProgress = useRef(false);
+  // const fadeInterval = 500; // Duration for fade (in ms)
+  // const fadeInProgress = useRef(false); // To track if fade-in is in progress
+  // const fadeOutProgress = useRef(false);
 
   useEffect(() => {
     sound.add(parameters.songName, {
