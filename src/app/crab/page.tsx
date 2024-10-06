@@ -2,26 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { TextGenerateEffect } from "../../components/ui/text-generate-effect";
-
-function StartChapter() {
-  return (
-    <div className="relative w-screen h-screen overflow-hidden">
-      <img
-        src="/crab/Full.jpg"
-        alt="Fullscreen background image"
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ filter: "brightness(0.4)" }}
-      />
-      <div className="absolute inset-0 flex items-center justify-center text-[#ECECEC]">
-        <div className="text-center">
-          <h1 className="text-7xl tracking-widest">III</h1>
-          <br></br>
-          <h1 className="text-6xl tracking-widest">CRAB NEBULA</h1>
-        </div>
-      </div>
-    </div>
-  );
-}
+import StartChapter from "@/components/ui/startChapter";
 
 function CrabChapter() {
   const words =
@@ -65,7 +46,11 @@ export default function Page() {
 
   return (
     <div onClick={() => setClicked(false)}>
-      {clicked ? <CrabChapter /> : <StartChapter />}
+      {clicked ? (
+        <CrabChapter />
+      ) : (
+        <StartChapter chapterNumber="III" chapterTitle="CRAB NEBULA" />
+      )}
     </div>
   );
 }
