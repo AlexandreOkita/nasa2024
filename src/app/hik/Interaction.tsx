@@ -10,6 +10,8 @@ export type PoIParameters = {
   y: number;
   songName: string;
   songPath: string;
+  isEnabled: boolean;
+  miniGamePage: string;
 };
 
 export function Interaction(parameters: PoIParameters) {
@@ -50,6 +52,8 @@ export function Interaction(parameters: PoIParameters) {
   };
 
   const handleMouseEnter = () => {
+    if (!parameters.isEnabled) return;
+
     setScaleMultiplier(1.5); // Scale up on hover
     // sound.play(parameters.songName);
 
@@ -63,6 +67,8 @@ export function Interaction(parameters: PoIParameters) {
   };
 
   const handleMouseLeave = () => {
+    if (!parameters.isEnabled) return;
+
     setScaleMultiplier(1); // Reset scale when not hovering
     // sound.stop(parameters.songName);
 
@@ -74,9 +80,16 @@ export function Interaction(parameters: PoIParameters) {
     fadeSound(0, fadeInterval);
   };
 
+  const handleClick = () => {
+    if (parameters.isEnabled) {
+      window.location.replace(parameters.miniGamePage);
+    }
+  };
+
   return (
     <Sprite
       image={"ClickableStar.png"}
+      alpha={parameters.isEnabled ? 1.0 : 0.4}
       x={parameters.x}
       y={parameters.y}
       anchor={{
@@ -87,6 +100,7 @@ export function Interaction(parameters: PoIParameters) {
       interactive={true}
       pointerover={handleMouseEnter}
       pointerout={handleMouseLeave}
+      pointertap={handleClick} // Handle click event for redirection
     />
   );
 }
