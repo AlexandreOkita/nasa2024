@@ -25,7 +25,7 @@ const mapCoordinateX = (x: number) =>
 const mapCoordinateY = (y: number) =>
   y * (window.innerHeight / gridSetting.rows);
 
-const buildInteractions = (currentLevel: number) => {
+const buildInteractions = (currentLevel: number, callback: (target: string) => void) => {
   const settings = [
     {
       x: 3,
@@ -59,6 +59,7 @@ const buildInteractions = (currentLevel: number) => {
       songPath={set.songPath}
       isEnabled={index <= currentLevel} // enable if currentLevel is greater or equal
       miniGamePage={set.miniGamePage}
+      onClick={callback}
     />
   ));
 
@@ -72,9 +73,12 @@ export default function MenuStage() {
   const [speed, setSpeed] = useState(0.025);
   const blurFilter = useMemo(() => new BlurFilter(2), []);
 
-  const transition = () => {
+  const transition = (target: string) => {
     setSpeed(1);
-  };
+    setTimeout(() => {
+      window.location.replace(target);
+    }, 2000)
+  }
 
   useEffect(() => {
     if (Number(localStorage.getItem("stage")) == 3) {
@@ -91,7 +95,7 @@ export default function MenuStage() {
     <>
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <StarField speed={speed} />
-        {buildInteractions(currentLevel)}
+        {buildInteractions(currentLevel, transition)}
       </Stage>
       {Number(localStorage.getItem("stage")) == 3 && (
         <div

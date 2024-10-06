@@ -14,6 +14,7 @@ export type PoIParameters = {
   songPath: string;
   isEnabled: boolean;
   miniGamePage: string;
+  onClick: (target: string) => void
 };
 
 export function Interaction(parameters: PoIParameters) {
@@ -84,7 +85,8 @@ export function Interaction(parameters: PoIParameters) {
 
   const handleClick = () => {
     if (parameters.isEnabled) {
-      window.location.replace(parameters.miniGamePage);
+      parameters.onClick(parameters.miniGamePage);
+      // window.location.replace(parameters.miniGamePage);
     }
   };
 
