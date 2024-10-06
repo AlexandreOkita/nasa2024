@@ -6,10 +6,21 @@ import { useEffect, useState } from "react";
 import LessonChapter from "../components/ui/lessonChapter";
 
 import { Stage } from "@pixi/react";
+import { sound } from "@pixi/sound";
+
 import StarField from "./hik/StarField";
 
 export default function Home() {
   localStorage.setItem("stage", "0");
+
+  useEffect(() => {
+    sound.add('home', {
+      url: "home/piano_nasa.wav", // Add your sound file here
+      loop: true, // Set sound to loop
+      preload: true,
+    });
+    sound.play('home');
+  }, []);
 
   const lessons = [
     "January 20, 2040",

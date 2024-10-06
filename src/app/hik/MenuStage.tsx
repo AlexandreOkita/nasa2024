@@ -84,6 +84,15 @@ export default function MenuStage() {
   }
 
   useEffect(() => {
+    sound.add('menu', {
+      url: "menu/pad-space-travel-hyperdrive-engine-humming-235901.wav", // Add your sound file here
+      loop: true, // Set sound to loop
+      preload: true,
+    });
+    sound.play('menu');
+  }, []);
+
+  useEffect(() => {
     if (Number(localStorage.getItem("stage")) == 3) {
       sound.add("final", {
         url: "musica_nasa.wav", // Add your sound file here
