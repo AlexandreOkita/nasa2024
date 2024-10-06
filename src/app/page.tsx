@@ -34,7 +34,7 @@ export default function Home() {
       }
     };
     const handleClick = () => {
-      if (clickable && lessonStarted) {
+      if (clickable) {
         setClickState();
         setClickable(false);
         const timer = setTimeout(() => {
