@@ -23,6 +23,8 @@ const config = {
         squadaone: ["SquadaOne"],
       },
       colors: {
+        fromCyan: "#292929",
+        toCyan: "#000000",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

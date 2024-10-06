@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import { TextGenerateEffect } from "../../components/ui/text-generate-effect";
 import StartChapter from "@/components/ui/startChapter";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import LessonChapter from "@/components/ui/lessonChapter";
 
 const lessons = [
   "A very strange light was visible on the earthling sky. What was mistaken by a “guest star” it was indeed the supernova that originated this remarkable nebula",
@@ -134,48 +135,6 @@ function CrabInteractiveChapter() {
   );
 }
 
-function CrabLessonChapter({
-  currentClickQtt,
-  clickable,
-}: {
-  currentClickQtt: number;
-  clickable: boolean;
-}) {
-  console.log("currentClickQtt", currentClickQtt);
-  console.log("lessons[currentClickQtt - 1]", lessons[currentClickQtt - 1]);
-  return (
-    <div className="relative w-screen h-screen overflow-hidden">
-      <img
-        src="/crab/Full.jpg"
-        alt="Fullscreen background image"
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 flex items-end justify-center text-[#ECECEC]">
-        <div className="w-full h-1/3 bg-gradient-to-t from-[rgba(0,0,0,0.8)] via-[rgba(0,0,0,0.5)] to-transparent flex items-end justify-center px-16 py-8">
-          <div className="text-center">
-            <TextGenerateEffect words={lessons[currentClickQtt - 1]} />
-          </div>
-        </div>
-      </div>
-      {clickable && (
-        <motion.div
-          className="absolute bottom-4 right-4 text-white"
-          animate={{
-            y: [0, -10, 0],
-          }}
-          transition={{
-            duration: 1,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-        >
-          <ChevronDown size={32} />
-        </motion.div>
-      )}
-    </div>
-  );
-}
-
 export default function Page() {
   const [clickQtt, setClickQtt] = useState(0);
   const [clickable, setClickable] = useState(false);
@@ -211,9 +170,24 @@ export default function Page() {
   return (
     <div onClick={() => setClickQtt(clickQtt)}>
       {clickQtt === 0 ? (
-        <StartChapter chapterNumber="III" chapterTitle="CRAB NEBULA" />
+        <StartChapter
+          chapterNumber="III"
+          chapterTitle="CRAB NEBULA"
+          img="/crab/Full.jpg"
+        />
       ) : clickQtt <= lessons.length ? (
-        <CrabLessonChapter currentClickQtt={clickQtt} clickable={clickable} />
+        <LessonChapter
+          currentClickQtt={clickQtt}
+          clickable={clickable}
+          lessons={lessons}
+          imgComponent={
+            <img
+              src="/crab/Full.jpg"
+              alt="Fullscreen background image"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          }
+        />
       ) : (
         <CrabInteractiveChapter />
       )}
