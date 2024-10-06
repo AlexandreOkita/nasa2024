@@ -55,29 +55,29 @@ export function Interaction(parameters: PoIParameters) {
     if (!parameters.isEnabled) return;
 
     setScaleMultiplier(1.5); // Scale up on hover
-    // sound.play(parameters.songName);
+    sound.play(parameters.songName);
 
-    if (fadeOutProgress.current) {
-      fadeOutProgress.current = false; // Stop any ongoing fade-out
-    }
+    // if (fadeOutProgress.current) {
+    //   fadeOutProgress.current = false; // Stop any ongoing fade-out
+    // }
 
-    fadeInProgress.current = true;
-    sound.play(parameters.songName); // Start the sound if it isn't playing yet
-    fadeSound(1, fadeInterval);
+    // fadeInProgress.current = true;
+    // sound.play(parameters.songName); // Start the sound if it isn't playing yet
+    // fadeSound(1, fadeInterval);
   };
 
   const handleMouseLeave = () => {
     if (!parameters.isEnabled) return;
 
     setScaleMultiplier(1); // Reset scale when not hovering
-    // sound.stop(parameters.songName);
+    sound.stop(parameters.songName);
 
-    if (fadeInProgress.current) {
-      fadeInProgress.current = false; // Stop any ongoing fade-in
-    }
+    // if (fadeInProgress.current) {
+    //   fadeInProgress.current = false; // Stop any ongoing fade-in
+    // }
 
-    fadeOutProgress.current = true;
-    fadeSound(0, fadeInterval);
+    // fadeOutProgress.current = true;
+    // fadeSound(0, fadeInterval);
   };
 
   const handleClick = () => {
