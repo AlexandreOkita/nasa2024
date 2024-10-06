@@ -87,7 +87,8 @@ export default function Page() {
               <div className="w-full h-[20vh] bg-gradient-to-b from-[rgba(0,0,0,0.9)] via-[rgba(0,0,0,0.8)] flex items-start justify-end px-16 py-8">
                 <button
                   onClick={() => {
-                    localStorage.setItem("stage", "2");
+                    const currentLevel = Number(localStorage.getItem("stage"));
+                    if (currentLevel < 2) localStorage.setItem("stage", "2");
                     window.location.replace("/hik");
                   }}
                   className="hover:underline"

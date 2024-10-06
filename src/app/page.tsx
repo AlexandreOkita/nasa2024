@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import LessonChapter from "../components/ui/lessonChapter";
 
 export default function Home() {
+  localStorage.setItem("stage", "0");
+  
   const lessons = [
     "January 20, 2040",
     "After 18 years of tireless work and countless contributions to science, James Webb is ending its mission and will receive its well-deserved rest amidst the apparent silence of the universe.",
