@@ -25,31 +25,34 @@ const mapCoordinateX = (x: number) =>
 const mapCoordinateY = (y: number) =>
   y * (window.innerHeight / gridSetting.rows);
 
-const buildInteractions = (currentLevel: number, callback: (target: string) => void) => {
-  const settings = [
-    {
-      x: 3,
-      y: 2,
-      songName: "first",
-      songPath: "cliff/cliff_harp_trim.wav",
-      miniGamePage: "/cliff",
-    },
-    {
-      x: 4.8,
-      y: 4.1,
-      songName: "second",
-      songPath: "sagittarius/sagittarius_grave_nasa_trim.wav",
-      miniGamePage: "/sagittarius",
-    },
-    {
-      x: 6.5,
-      y: 2.5,
-      songName: "third",
-      songPath: "crab/crab_twilight_nasa_trim.wav",
-      miniGamePage: "/crab",
-    },
-  ];
+const settings = [
+  {
+    x: 3,
+    y: 2,
+    songName: "first",
+    songPath: "cliff/cliff_harp_trim.wav",
+    miniGamePage: "/cliff",
+    title: "COSMIC CLIFFS"
+  },
+  {
+    x: 4.8,
+    y: 4.1,
+    songName: "second",
+    songPath: "sagittarius/sagittarius_grave_nasa_trim.wav",
+    miniGamePage: "/sagittarius",
+    title: "SAGITTARIUS C"
+  },
+  {
+    x: 6.5,
+    y: 2.5,
+    songName: "third",
+    songPath: "crab/crab_twilight_nasa_trim.wav",
+    miniGamePage: "/crab",
+    title: "CRAB NEBULA"
+  },
+];
 
+const buildInteractions = (currentLevel: number, callback: (target: string) => void) => {
   const buttons = settings.map((set, index) => (
     <Interaction
       key={index}
@@ -84,7 +87,7 @@ export default function MenuStage() {
     if (Number(localStorage.getItem("stage")) == 3) {
       sound.add("final", {
         url: "musica_nasa.wav", // Add your sound file here
-        loop: true, // Set sound to loop
+        loop: false, // Set sound to loop
         preload: true,
       });
       sound.play("final");
@@ -93,6 +96,11 @@ export default function MenuStage() {
 
   return (
     <>
+      <div className="absolute inset-0 flex items-start justify-center z-30 pt-24">
+        <h1 className="text-6xl font-bold text-[#ECECEC]">{
+        Number(localStorage.getItem("stage")) <= 3 ? settings[Number(localStorage.getItem("stage"))].title : "Qualquer coisa"
+        }</h1>
+      </div>
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <StarField speed={speed} />
         {buildInteractions(currentLevel, transition)}
