@@ -120,7 +120,7 @@ export default function Page() {
               <div className="relative w-screen h-screen overflow-hidden">
                 {
                   <img
-                    src="cliff/cliff-hubble-site.webp"
+                    src="sagittarius/full.png"
                     alt="Fullscreen background image"
                     className="absolute inset-0 w-full h-full object-cover"
                   />
@@ -141,7 +141,7 @@ export default function Page() {
               hideContinue={clickQtt >= 2}
               imgComponent={
                 <img
-                  src="cliff/cliff-hubble-site.webp"
+                  src="sagittarius/full.png"
                   alt="Fullscreen background image"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
