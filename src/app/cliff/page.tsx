@@ -37,7 +37,7 @@ export default function Page() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setClickable(true);
-    }, 3000);
+    }, 700);
 
     return () => clearTimeout(timer);
   }, []);
@@ -59,7 +59,7 @@ export default function Page() {
         setClickable(false);
         const timer = setTimeout(() => {
           setClickable(true);
-        }, 3000);
+        }, 700);
 
         return () => clearTimeout(timer);
       }
