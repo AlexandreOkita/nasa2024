@@ -86,33 +86,34 @@ export default function Page() {
       ) : (
         <>
           {clickQtt >= lessons.length && (
-            <div className="w-full absolute flex z-50 justify-end font-alata text-2xl text-[#ECECEC] mt-4 pr-6">
-              <button
-                onClick={() => {
-                  const currentLevel = Number(localStorage.getItem("stage"));
-                  if (currentLevel < 1)
-                  localStorage.setItem("stage", "1");
-                  window.location.replace("/hik");
-                }}
-                className="hover:underline"
-              >
-                <div className="flex items-center justify-center">
-                  <div className="pr-4">NEXT ADVENTURE</div>
-                  <motion.div
-                    className="bottom-4 right-4 text-white z-30"
-                    animate={{
-                      x: [0, -10, 0],
-                    }}
-                    transition={{
-                      duration: 1,
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                    }}
-                  >
-                    <ChevronsRight size={32} />
-                  </motion.div>
-                </div>
-              </button>
+            <div className="w-full absolute flex z-50 justify-end font-alata text-2xl text-[#ECECEC]">
+              <div className="w-full h-[20vh] bg-gradient-to-b from-[rgba(0,0,0,0.9)] via-[rgba(0,0,0,0.8)] flex items-start justify-end px-16 py-8">
+                <button
+                  onClick={() => {
+                    const currentLevel = Number(localStorage.getItem("stage"));
+                    if (currentLevel < 1) localStorage.setItem("stage", "1");
+                    window.location.replace("/hik");
+                  }}
+                  className="hover:underline"
+                >
+                  <div className="flex items-center justify-center">
+                    <div className="pr-4 text-4xl">NEXT ADVENTURE</div>
+                    <motion.div
+                      className="bottom-4 right-4 text-white z-30"
+                      animate={{
+                        x: [0, -10, 0],
+                      }}
+                      transition={{
+                        duration: 1,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                      }}
+                    >
+                      <ChevronsRight size={32} />
+                    </motion.div>
+                  </div>
+                </button>
+              </div>
             </div>
           )}
           <LessonChapter
