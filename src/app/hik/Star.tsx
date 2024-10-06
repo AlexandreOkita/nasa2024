@@ -1,6 +1,6 @@
 "use-client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Sprite, useTick } from "@pixi/react";
 
@@ -17,25 +17,30 @@ export type StarParameters = {
   screenWidth: number;
   screenHeight: number;
   cameraZ: number;
+  onRecycle: () => void;
 };
 
 export function Star(parameters: StarParameters) {
   const [x, setX] = useState(parameters.initialPosX);
   const [y, setY] = useState(parameters.initialPosY);
-  const [z, setZ] = useState(parameters.initialPosZ);
   const [speed, setSpeed] = useState(parameters.baseSpeed || 0);
   const [alpha, setAlpha] = useState(1);
   const [flickerPhase] = useState(Math.random() * Math.PI * 2);
 
   useTick((delta) => {
-    setZ(z - parameters.cameraZ);
-    // console.log(x * (fov / z) * parameters.screenWidth + parameters.screenWidth / 2);
+    const newZ = parameters.initialPosZ - parameters.cameraZ;
+
+    if (newZ < 0) {
+      parameters.onRecycle();  // Call the recycling callback
+      console.log(`killing ${newZ} ${parameters.initialPosZ} ${parameters.cameraZ}`);
+      return;  // Exit early to avoid further calculations
+    }
     setX(
-      parameters.initialPosX * (fov / z) * parameters.screenWidth +
+      parameters.initialPosX * (fov / newZ) * parameters.screenWidth +
         parameters.screenWidth / 2
     );
     setY(
-      parameters.initialPosY * (fov / z) * parameters.screenWidth +
+      parameters.initialPosY * (fov / newZ) * parameters.screenWidth +
         parameters.screenHeight / 2
     );
 
@@ -46,7 +51,8 @@ export function Star(parameters: StarParameters) {
   const dxCenter = x - parameters.screenWidth / 2;
   const dyCenter = y - parameters.screenHeight / 2;
   const distanceCenter = Math.sqrt(dxCenter * dxCenter + dyCenter * dyCenter);
-  const distanceScale = Math.max(0, (2000 - z) / 2000);
+  const distanceScale = Math.max(0, (2000 - (parameters.initialPosZ - parameters.cameraZ)) / 2000);
+  console.log(distanceScale)
 
   return (
     <Sprite
@@ -57,7 +63,7 @@ export function Star(parameters: StarParameters) {
       scale={{
         x: distanceScale * parameters.starBaseSize,
         y:
-          distanceScale * parameters.starBaseSize +
+          distanceScale * parameters.starBaseSize + 
           (distanceScale * speed * parameters.starStretch * distanceCenter) /
             parameters.screenWidth,
       }}
