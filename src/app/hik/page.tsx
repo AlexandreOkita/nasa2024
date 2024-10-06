@@ -96,9 +96,9 @@ export default function MenuStage() {
 
   return (
     <>
-      <div className="absolute inset-0 flex items-start justify-center z-30 pt-24">
-        <h1 className="text-6xl font-bold text-[#ECECEC]">{
-        Number(localStorage.getItem("stage")) <= 3 ? settings[Number(localStorage.getItem("stage"))].title : "Qualquer coisa"
+      <div className="absolute inset-0 flex items-start justify-center z-30 pt-24 pointer-events-none">
+        <h1 className="text-6xl font-bold text-[#ECECEC] pointer-events-auto">{
+        Number(localStorage.getItem("stage")) <= 2 ? settings[Number(localStorage.getItem("stage"))].title : "Qualquer coisa"
         }</h1>
       </div>
       <Stage width={window.innerWidth} height={window.innerHeight}>
