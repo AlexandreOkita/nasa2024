@@ -5,7 +5,7 @@ import LessonChapter from "@/components/ui/lessonChapter";
 import StartChapter from "@/components/ui/startChapter";
 import { motion } from "framer-motion";
 import { ChevronsRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const lessons = [
   "To start our journey across the amazing James Webb discoveries we will take a look at the beautiful Cosmic Cliffs",
@@ -32,6 +32,7 @@ function RenderCompare() {
 export default function Page() {
   const [clickQtt, setClickQtt] = useState(0);
   const [clickable, setClickable] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -49,6 +50,11 @@ export default function Page() {
     };
     const handleClick = () => {
       if (clickable) {
+        if (audioRef.current && clickQtt === 0) {
+          audioRef.current.play().catch((error) => {
+            console.error("Failed to play audio:", error);
+          });
+        }
         setClickState();
         setClickable(false);
         const timer = setTimeout(() => {
@@ -68,6 +74,7 @@ export default function Page() {
 
   return (
     <div onClick={() => setClickQtt(clickQtt)}>
+      <audio ref={audioRef} src="/cliff/cliff_harp_trim.wav" />
       {clickQtt == 0 ? (
         <div>
           <StartChapter

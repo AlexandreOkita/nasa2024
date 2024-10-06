@@ -6,7 +6,7 @@ import StartChapter from "@/components/ui/startChapter";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { motion } from "framer-motion";
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const lessons = [
   "The stunning 50 light-years portrait of the dense center of our galaxy, the Milky Way, launches new mysteries to be inquired about, especially arround the protostars",
@@ -26,6 +26,7 @@ export default function Page() {
   const [clickable, setClickable] = useState(false);
   const [text, setText] = useState("");
   const [quantity, setQuantity] = useState(5);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -43,6 +44,11 @@ export default function Page() {
     };
     const handleClick = () => {
       if (clickable) {
+        if (audioRef.current && clickQtt === 0) {
+          audioRef.current.play().catch((error) => {
+            console.error("Failed to play audio:", error);
+          });
+        }
         setClickState();
         setClickable(false);
         const timer = setTimeout(() => {
@@ -62,6 +68,10 @@ export default function Page() {
 
   return (
     <div>
+      <audio
+        ref={audioRef}
+        src="/sagittarius/sagittarius_grave_nasa_trim.wav"
+      />
       {clickQtt == 0 ? (
         <div>
           <StartChapter

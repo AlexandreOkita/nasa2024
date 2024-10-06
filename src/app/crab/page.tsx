@@ -184,7 +184,7 @@ export default function Page() {
 
   return (
     <div onClick={() => setClickQtt(clickQtt)}>
-      <audio ref={audioRef} src="/crab/crab_harp_trim.wav" />
+      <audio ref={audioRef} src="/crab/crab_twilight_nasa_trim.wav" />
       {clickQtt === 0 ? (
         <StartChapter
           chapterNumber="III"
