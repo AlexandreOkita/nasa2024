@@ -5,7 +5,7 @@ import LessonChapter from "@/components/ui/lessonChapter";
 import StartChapter from "@/components/ui/startChapter";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { motion } from "framer-motion";
-import { ChevronsRight } from "lucide-react";
+import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const lessons = [
@@ -21,25 +21,11 @@ const answers = {
 
 const question = "Can you estimate how many stars are present in the picture?";
 
-function RenderCompare() {
-  return (
-    <div className="absolute inset-0 w-full h-full object-cover">
-      <Compare
-        firstImage="cliff/cliff-hubble-site.webp"
-        secondImage="cliff/cliff-jw-site.webp"
-        firstImageClassName="object-cover object-left-top"
-        secondImageClassname="object-cover object-left-top"
-        className="h-screen w-screen"
-        slideMode="hover"
-      />
-    </div>
-  );
-}
-
 export default function Page() {
   const [clickQtt, setClickQtt] = useState(0);
   const [clickable, setClickable] = useState(false);
   const [text, setText] = useState("");
+  const [quantity, setQuantity] = useState(5);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -51,8 +37,8 @@ export default function Page() {
 
   useEffect(() => {
     const setClickState = () => {
-      if (clickQtt < 3) {
-        setClickQtt((prev) => prev + 1);
+      if (clickQtt < 3 && clickQtt != 2) {
+        setClickQtt(clickQtt + 1);
       }
     };
     const handleClick = () => {
@@ -74,16 +60,14 @@ export default function Page() {
     };
   }, [clickable]);
 
-  console.log("clickQtt:", clickQtt);
-
   return (
-    <div onClick={() => setClickQtt(clickQtt)}>
+    <div>
       {clickQtt == 0 ? (
         <div>
           <StartChapter
             chapterNumber="II"
             chapterTitle="SAGITTARIUS C"
-            img="cliff/cliff-hubble-site.webp"
+            img="sagittarius/full.png"
           />
         </div>
       ) : (
@@ -92,7 +76,8 @@ export default function Page() {
             <div className="w-full absolute flex z-50 justify-end font-alata text-2xl text-[#ECECEC] mt-4 pr-6">
               <button
                 onClick={() => {
-                  console.log("NEXT ADVENTURE clicked");
+                  localStorage.setItem("stage", "2");
+                  window.location.replace("/hik");
                 }}
                 className="hover:underline"
               >
@@ -127,8 +112,43 @@ export default function Page() {
                 }
               </div>
               <div className="absolute inset-0 flex items-end justify-center text-[#ECECEC]">
-                <div className="z-20 w-full h-auto flex items-end justify-center px-16 py-8 bg-[linear-gradient(185deg,_#292929_4%,_#000000_30.58%)]">
-                  <div className="text-center text-2xl">{question}</div>
+                <div className="z-20 w-screen h-auto flex items-end justify-center px-16 py-8 bg-[linear-gradient(185deg,_#292929_4%,_#000000_30.58%)]">
+                  <div className="flex flex-col w-full">
+                    <div className="text-center text-2xl">{question}</div>
+                    <div className="flex justify-between text-4xl px-10 pt-5 items-center font-alata">
+                      <div className="w-[100px] p-5"></div>
+                      <div className="flex gap-10">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (quantity - 1 !== 0) {
+                              setQuantity(quantity - 1);
+                            }
+                          }}
+                          className="pt-[2px]"
+                        >
+                          <ChevronsLeft size={32} />
+                        </button>
+                        <div>{quantity}</div>
+                        <button
+                          type="button"
+                          onClick={() => setQuantity(quantity + 1)}
+                          className="pt-[2px]"
+                        >
+                          <ChevronsRight size={32} />
+                        </button>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setClickQtt(clickQtt + 1);
+                        }}
+                        className="w-auto p-5 border border-slate-50 rounded-[30px]"
+                      >
+                        GUESS
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </>
@@ -137,7 +157,13 @@ export default function Page() {
               currentClickQtt={clickQtt > 1 ? 1 : clickQtt}
               clickable={clickable}
               lessons={lessons}
-              text={text}
+              text={
+                clickQtt == 3
+                  ? quantity == 6
+                    ? answers.correct
+                    : answers.error
+                  : ""
+              }
               hideContinue={clickQtt >= 2}
               imgComponent={
                 <img
