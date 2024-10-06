@@ -15,9 +15,12 @@ export default function LessonChapter({
   clickable: boolean;
   lessons: string[];
   text?: string;
-  imgComponent: ReactNode;
+  imgComponent?: ReactNode;
   hideContinue?: boolean;
 }) {
+  console.log("currentClickQtt", currentClickQtt);
+  console.log("lessons", lessons);
+  console.log("text", text);
   return (
     <div className="relative w-screen h-screen overflow-hidden">
       {imgComponent}
