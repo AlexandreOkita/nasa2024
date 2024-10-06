@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setClickable(true);
-    }, 3000);
+    }, 700);
 
     return () => clearTimeout(timer);
   }, []);
@@ -39,7 +39,7 @@ export default function Home() {
         setClickable(false);
         const timer = setTimeout(() => {
           setClickable(true);
-        }, 3000);
+        }, 700);
 
         return () => clearTimeout(timer);
       }
