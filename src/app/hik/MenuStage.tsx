@@ -28,21 +28,21 @@ const buildInteractions = (currentLevel: number) => {
       x: 3, 
       y: 2,
       songName: "first",
-      songPath: "crab/crab_harp_trim.wav",
+      songPath: "cliff/cliff_harp_trim.wav",
       miniGamePage: "/cliff",
      },
     { 
       x: 4.8, 
       y: 4.1,
       songName: "second",
-      songPath: "crab/crab_harp_trim.wav",
+      songPath: "sagittarius/sagittarius_grave_nasa_trim.wav",
       miniGamePage: "/sagittarius",
     },
     { 
       x: 6.5, 
       y: 2.5,
       songName: "third",
-      songPath: "crab/crab_harp_trim.wav",
+      songPath: "crab/crab_twilight_nasa_trim.wav",
       miniGamePage: "/crab",
     },
   ];
@@ -54,7 +54,7 @@ const buildInteractions = (currentLevel: number) => {
       y={mapCoordinateY(set.y)}
       songName={set.songName}
       songPath={set.songPath}
-      isEnabled={currentLevel >= index+1} // enable if currentLevel is greater or equal
+      isEnabled={index <= currentLevel} // enable if currentLevel is greater or equal
       miniGamePage={set.miniGamePage}
     />
   ));
@@ -63,17 +63,14 @@ const buildInteractions = (currentLevel: number) => {
 }
 
 export default function MenuStage() {
+  const currentLevel = Number(localStorage.getItem("stage"))
+  
   const [speed, setSpeed] = useState(0.025)
   const blurFilter = useMemo(() => new BlurFilter(2), []);
 
   const transition = () => {
     setSpeed(1);
   }
-  const [currentLevel, setCurrentLevel] = useState(2); // track current level
-
-  const increaseLevel = () => {
-    setCurrentLevel((prevLevel) => Math.min(prevLevel+1, 4));
-  };
 
   return (
     <>
