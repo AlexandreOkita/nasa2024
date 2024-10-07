@@ -18,8 +18,8 @@ function RenderCompare() {
   return (
     <div className="absolute inset-0 w-full h-full object-cover">
       <Compare
-        firstImage="cliff/cliff-jw-site.webp"
-        secondImage="cliff/cliff-hubble-site.webp"
+        firstImage="cliff/cliff-jw-site.png"
+        secondImage="cliff/cliff-hubble-site2.png"
         firstImageClassName="object-cover object-left-top"
         secondImageClassname="object-cover object-left-top"
         className="h-screen w-screen"
@@ -80,7 +80,7 @@ export default function Page() {
           <StartChapter
             chapterNumber="I"
             chapterTitle="COSMIC CLIFFS"
-            img="cliff/cliff-hubble-site.webp"
+            img="cliff/cliff-hubble-site.png"
           />
         </div>
       ) : (
@@ -124,7 +124,7 @@ export default function Page() {
             imgComponent={
               clickQtt <= 3 ? (
                 <img
-                  src="cliff/cliff-hubble-site.webp"
+                  src="cliff/cliff-hubble-site.png"
                   alt="Fullscreen background image"
                   className="absolute inset-0 w-full h-full object-cover"
                 />

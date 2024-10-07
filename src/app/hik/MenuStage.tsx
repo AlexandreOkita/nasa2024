@@ -103,7 +103,7 @@ export default function MenuStage() {
           ) : (
             <div className="flex justify-center flex-col items-center">
               <div>THE UNIVERSE SYMPHONY</div>
-              <div className="text-3xl mt-4">IS COMPLETE</div>
+              <div className="text-3xl mt-4">IS COMPLETED</div>
             </div>
           )}
         </h1>

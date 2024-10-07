@@ -172,7 +172,7 @@ export default function Page() {
               lessons={lessons}
               text={
                 clickQtt == 3
-                  ? quantity == 6
+                  ? quantity == 5
                     ? answers.correct
                     : answers.error
                   : ""
