@@ -51,7 +51,7 @@ export default function StartChapter({
             transition={{ duration: 4.5, ease: "easeInOut" }}
           >
             <div className="text-center">
-              <h1 className="text-2xl tracking-widest">Click to Continue</h1>
+              <h1 className="text-2xl tracking-widest">CLICK TO CONTINUE</h1>
             </div>
           </motion.div>
         )}
