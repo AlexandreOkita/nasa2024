@@ -6,7 +6,7 @@ import LessonChapter from "../components/ui/lessonChapter";
 import { Stage } from "@pixi/react";
 import { sound } from "@pixi/sound";
 
-import StarField from "./hik/StarField";
+import StarField from "./menu/StarField";
 
 export default function Home() {
   localStorage.setItem("stage", "0");
@@ -43,7 +43,7 @@ export default function Home() {
   useEffect(() => {
     const setClickState = () => {
       if (clickQtt === 3) {
-        window.location.replace("/hik");
+        window.location.replace("/menu");
       }
       if (clickQtt < lessons.length && clickQtt < 3) {
         setClickQtt((prev) => prev + 1);

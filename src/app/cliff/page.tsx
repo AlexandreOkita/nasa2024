@@ -93,7 +93,7 @@ export default function Page() {
                   onClick={() => {
                     const currentLevel = Number(localStorage.getItem("stage"));
                     if (currentLevel < 1) localStorage.setItem("stage", "1");
-                    window.location.replace("/hik");
+                    window.location.replace("/menu");
                   }}
                   className="hover:underline"
                 >

@@ -105,7 +105,7 @@ function CrabInteractiveChapter({ setRenderNext }: Props) {
               <button
                 onClick={() => {
                   localStorage.setItem("stage", "3");
-                  window.location.replace("/hik");
+                  window.location.replace("/menu");
                 }}
                 className="hover:underline"
               >
@@ -216,7 +216,7 @@ export default function Page() {
                   onClick={() => {
                     const currentLevel = Number(localStorage.getItem("stage"));
                     if (currentLevel < 3) localStorage.setItem("stage", "3");
-                    window.location.replace("/hik");
+                    window.location.replace("/menu");
                   }}
                   className="hover:underline"
                 >
