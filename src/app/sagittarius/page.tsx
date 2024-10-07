@@ -128,7 +128,7 @@ export default function Page() {
               <div className="absolute inset-0 flex items-end justify-center text-[#ECECEC]">
                 <div className="z-20 w-full h-[40vh] bg-gradient-to-t from-[rgba(0,0,0,0.8)] via-[rgba(0,0,0,0.8)] to-transparent flex items-end justify-center px-16 pb-8">
                   <div className="flex flex-col w-full">
-                    <div className="text-center text-2xl font-alata">
+                    <div className="text-center text-3xl font-alata">
                       {question}
                     </div>
                     <div className="flex justify-between text-4xl px-10 pt-5 items-center font-alata">
@@ -159,7 +159,7 @@ export default function Page() {
                         onClick={() => {
                           setClickQtt(clickQtt + 1);
                         }}
-                        className="w-auto p-5 border border-slate-50 rounded-[30px]"
+                        className="w-auto py-3 px-6 border border-slate-50 rounded-[23px] text-3xl"
                       >
                         GUESS
                       </button>
