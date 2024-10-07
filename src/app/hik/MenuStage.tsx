@@ -60,7 +60,8 @@ const buildInteractions = (
       y={mapCoordinateY(set.y)}
       songName={set.songName}
       songPath={set.songPath}
-      isEnabled={index <= currentLevel} // enable if currentLevel is greater or equal
+      isCompleted={index < currentLevel}
+      isEnabled={index == currentLevel}
       miniGamePage={set.miniGamePage}
       onClick={callback}
     />
@@ -80,8 +81,8 @@ export default function MenuStage() {
     setSpeed(1);
     setTimeout(() => {
       window.location.replace(target);
-    }, 2000);
-  };
+    }, 300);
+  }
 
   useEffect(() => {
     sound.add('menu', {
@@ -112,7 +113,7 @@ export default function MenuStage() {
           ) : (
             <div className="flex justify-center flex-col items-center">
               <div>THE UNIVERSE SYMPHONY</div>
-              <div className="text-3xl mt-4">IS COMPLETE</div>
+              <div className="text-3xl mt-4">IS COMPLETED</div>
             </div>
           )}
         </h1>
