@@ -60,7 +60,8 @@ const buildInteractions = (
       y={mapCoordinateY(set.y)}
       songName={set.songName}
       songPath={set.songPath}
-      isEnabled={index <= currentLevel} // enable if currentLevel is greater or equal
+      isCompleted={index < currentLevel}
+      isEnabled={index == currentLevel}
       miniGamePage={set.miniGamePage}
       onClick={callback}
     />
@@ -80,8 +81,8 @@ export default function MenuStage() {
     setSpeed(1);
     setTimeout(() => {
       window.location.replace(target);
-    }, 2000);
-  };
+    }, 300);
+  }
 
   useEffect(() => {
     if (Number(localStorage.getItem("stage")) == 3) {
