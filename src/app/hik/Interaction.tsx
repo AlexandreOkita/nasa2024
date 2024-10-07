@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 
 import { Sprite, Text, Container, useTick } from "@pixi/react";
-import { TextStyle } from 'pixi.js';
+import { TextStyle } from "pixi.js";
 import { sound } from "@pixi/sound";
 import { param } from "framer-motion/client";
 
@@ -19,8 +19,8 @@ export type PoIParameters = {
   isEnabled: boolean;
   miniGamePage: string;
   isGameFinished: boolean;
-  onClick: (target: string) => void
-  onHover: (title: string) => void
+  onClick: (target: string) => void;
+  onHover: (title: string) => void;
 };
 
 export function Interaction(parameters: PoIParameters) {
@@ -41,13 +41,15 @@ export function Interaction(parameters: PoIParameters) {
   }, []);
 
   useEffect(() => {
-    const timer1 = setTimeout(() => {
-      setStartAnimation(true);
-    }, parameters.finalAnimationTime);
+    if (parameters.isGameFinished) {
+      const timer1 = setTimeout(() => {
+        setStartAnimation(true);
+      }, parameters.finalAnimationTime);
 
-    return () => {
-      clearTimeout(timer1);
-    };
+      return () => {
+        clearTimeout(timer1);
+      };
+    }
   });
 
   const fadeSound = (targetVolume: number, duration: number) => {
@@ -75,7 +77,7 @@ export function Interaction(parameters: PoIParameters) {
   const handleMouseEnter = () => {
     if (parameters.isEnabled || parameters.isCompleted) {
       // if (parameters.isEnabled) {
-        setScaleMultiplier(initialScale * 1.3); // Scale up on hover
+      setScaleMultiplier(initialScale * 1.3); // Scale up on hover
       // }
       sound.play(parameters.songName);
       parameters.onHover(parameters.songName);
@@ -147,17 +149,21 @@ export function Interaction(parameters: PoIParameters) {
         pointerout={handleMouseLeave}
         pointertap={handleClick} // Handle click event for redirection
       />
-      {parameters.isEnabled && (<Text
-        text={"START ADVENTURE"}  // Display the label text
-        x={parameters.x}  // Align text with the button's X position
-        y={parameters.y + 100}  // Slightly above the button
-        anchor={0.5}
-        style={new TextStyle({
-          fill: "#A9A5A5", // Text color
-          fontSize: 18,    // Adjust font size as needed
-          fontFamily: "alata"
-        })}
-      />)}
+      {parameters.isEnabled && (
+        <Text
+          text={"START ADVENTURE"} // Display the label text
+          x={parameters.x} // Align text with the button's X position
+          y={parameters.y + 100} // Slightly above the button
+          anchor={0.5}
+          style={
+            new TextStyle({
+              fill: "#A9A5A5", // Text color
+              fontSize: 18, // Adjust font size as needed
+              fontFamily: "alata",
+            })
+          }
+        />
+      )}
     </Container>
   );
 }

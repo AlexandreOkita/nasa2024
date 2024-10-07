@@ -94,7 +94,7 @@ export default function MenuStage() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const [speed, setSpeed] = useState(0.025);
-  const [title, setTitle] = useState("")
+  const [title, setTitle] = useState("");
   const blurFilter = useMemo(() => new BlurFilter(2), []);
 
   const transition = (target: string) => {
@@ -105,8 +105,8 @@ export default function MenuStage() {
   };
 
   const hoverTitleUpdate = (newTitle: string) => {
-    setTitle(newTitle)
-  }
+    setTitle(newTitle);
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -144,14 +144,18 @@ export default function MenuStage() {
   //   }
   // }, []);
 
-  const percentage = Math.round((currentLevel/3) * 100)
+  const percentage = Math.round((currentLevel / 3) * 100);
 
   return (
     <>
       <div className="absolute inset-0 flex items-start justify-center z-30 pt-24 pointer-events-none">
         <h1 className="text-6xl font-bold text-[#CBC9C9] pointer-events-auto">
           {Number(localStorage.getItem("stage")) <= 2 ? (
-            title.length < 1 ? "EXPLORE THE STARS" : title
+            title.length < 1 ? (
+              "EXPLORE THE STARS"
+            ) : (
+              title
+            )
           ) : (
             <div className="flex justify-center flex-col items-center text-[#CBC9C9]">
               <div>THE UNIVERSE SYMPHONY</div>
@@ -200,9 +204,11 @@ export default function MenuStage() {
           </div>
         </div>
       )}
-      <div className="absolute bottom-4 left-0 right-0 flex justify-center text-[#CBC9C9] text-3xl font-bold pb-16">
-        {percentage}% COMPLETE
-      </div>
+      {percentage < 100 && (
+        <div className="absolute bottom-4 left-0 right-0 flex justify-center text-[#CBC9C9] text-3xl font-bold pb-16">
+          {percentage}% COMPLETE
+        </div>
+      )}
     </>
   );
 }
