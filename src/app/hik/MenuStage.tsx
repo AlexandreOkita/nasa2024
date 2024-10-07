@@ -49,12 +49,26 @@ const settings = [
   },
 ];
 
+const getAnimationTime = (index: number) => {
+  switch (index) {
+    case 0:
+      return 2000;
+    case 1:
+      return 10000;
+    case 2:
+      return 22000;
+    default:
+      return 50000;
+  }
+};
+
 const buildInteractions = (
   currentLevel: number,
   callback: (target: string) => void
 ) => {
   const buttons = settings.map((set, index) => (
     <Interaction
+      finalAnimationTime={getAnimationTime(index)}
       key={index}
       x={mapCoordinateX(set.x)}
       y={mapCoordinateY(set.y)}
