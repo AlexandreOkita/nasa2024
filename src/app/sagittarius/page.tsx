@@ -45,6 +45,7 @@ export default function Page() {
     const handleClick = () => {
       if (clickable) {
         if (audioRef.current && clickQtt === 0) {
+          audioRef.current.loop = true;
           audioRef.current.play().catch((error) => {
             console.error("Failed to play audio:", error);
           });
@@ -125,16 +126,18 @@ export default function Page() {
                 }
               </div>
               <div className="absolute inset-0 flex items-end justify-center text-[#ECECEC]">
-                <div className="z-20 w-screen h-auto flex items-end justify-center px-16 py-8 bg-[linear-gradient(185deg,_#292929_4%,_#000000_30.58%)]">
+                <div className="z-20 w-full h-[40vh] bg-gradient-to-t from-[rgba(0,0,0,0.8)] via-[rgba(0,0,0,0.8)] to-transparent flex items-end justify-center px-16 pb-8">
                   <div className="flex flex-col w-full">
-                    <div className="text-center text-2xl font-alata">{question}</div>
+                    <div className="text-center text-2xl font-alata">
+                      {question}
+                    </div>
                     <div className="flex justify-between text-4xl px-10 pt-5 items-center font-alata">
                       <div className="w-[100px] p-5"></div>
                       <div className="flex gap-10">
                         <button
                           type="button"
                           onClick={() => {
-                            if (quantity - 1 !== 0) {
+                            if (quantity > 0) {
                               setQuantity(quantity - 1);
                             }
                           }}
