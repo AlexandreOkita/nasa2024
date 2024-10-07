@@ -45,6 +45,7 @@ export default function Page() {
     const handleClick = () => {
       if (clickable) {
         if (audioRef.current && clickQtt === 0) {
+          audioRef.current.loop = true;
           audioRef.current.play().catch((error) => {
             console.error("Failed to play audio:", error);
           });
