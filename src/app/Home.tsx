@@ -1,7 +1,5 @@
 "use client";
 
-import { StarsBackground } from "../components/ui/stars-background";
-import { ShootingStars } from "../components/ui/shooting-stars";
 import { useEffect, useState } from "react";
 import LessonChapter from "../components/ui/lessonChapter";
 
@@ -14,12 +12,12 @@ export default function Home() {
   localStorage.setItem("stage", "0");
 
   useEffect(() => {
-    sound.add('home', {
+    sound.add("home", {
       url: "home/piano_nasa.wav", // Add your sound file here
       loop: true, // Set sound to loop
       preload: true,
     });
-    sound.play('home');
+    sound.play("home");
   }, []);
 
   const lessons = [
@@ -33,6 +31,7 @@ export default function Home() {
   const [clickable, setClickable] = useState(false);
 
   useEffect(() => {
+    localStorage.setItem("stage", "0");
     const timer = setTimeout(() => {
       setClickable(true);
     }, 700);
@@ -68,9 +67,7 @@ export default function Home() {
     };
   }, [clickable]);
 
-  console.log("clickQtt ==>", clickQtt);
-
-  const speed = 0.025
+  const speed = 0.025;
 
   return (
     <>
