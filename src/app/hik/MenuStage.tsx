@@ -88,6 +88,7 @@ const buildInteractions = (
 export default function MenuStage() {
   const currentLevel = Number(localStorage.getItem("stage"));
   const [currentClickQtt, setCurrentClickQtt] = useState(0);
+  const [showRetry, setShowRetry] = useState(false);
 
   const [speed, setSpeed] = useState(0.025);
   const blurFilter = useMemo(() => new BlurFilter(2), []);
@@ -100,6 +101,9 @@ export default function MenuStage() {
   };
 
   useEffect(() => {
+    setTimeout(() => {
+      setShowRetry(true);
+    }, 5000);
     if (currentLevel != 3) {
       sound.add("menu", {
         url: "menu/pad-space-travel-hyperdrive-engine-humming-235901.wav", // Add your sound file here
@@ -150,13 +154,29 @@ export default function MenuStage() {
         >
           <div className="z-20 w-full h-auto bg-gradient-to-t from-[rgba(0,0,0,0.8)] via-[rgba(0,0,0,0.5)] to-transparent flex items-end justify-center px-16 pb-8">
             <div className="text-center">
-              <TextGenerateEffect words={FINAL_TEXT} />
-              <div className="w-[60vh] h-[110px] overflow-hidden rounded-2xl">
-                <img
-                  src="gif-music.gif"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+              {/* <TextGenerateEffect words={FINAL_TEXT} /> */}
+              {showRetry ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    localStorage.setItem("stage", "0");
+                    window.location.replace("/");
+                  }}
+                  className="h-[110px] text-3xl font-alata text-[#D4D2D2]"
+                >
+                  RETRY
+                </button>
+              ) : (
+                <>
+                  <TextGenerateEffect words={FINAL_TEXT} />
+                  <div className="w-[60vh] h-[110px] overflow-hidden rounded-2xl">
+                    <img
+                      src="gif-music.gif"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
