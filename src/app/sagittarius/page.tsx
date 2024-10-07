@@ -136,7 +136,7 @@ export default function Page() {
                         <button
                           type="button"
                           onClick={() => {
-                            if (quantity - 1 !== 0) {
+                            if (quantity > 0) {
                               setQuantity(quantity - 1);
                             }
                           }}
