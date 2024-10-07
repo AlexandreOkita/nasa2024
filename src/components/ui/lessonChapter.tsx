@@ -30,7 +30,7 @@ export default function LessonChapter({
       </div>
       {clickable && !hideContinue && (
         <motion.div
-          className="absolute bottom-4 right-4 text-white z-30"
+          className="absolute bottom-4 right-4 text-[#ECECEC] z-30"
           animate={{
             y: [0, -10, 0],
           }}
