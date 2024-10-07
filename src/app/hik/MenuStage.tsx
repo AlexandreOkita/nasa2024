@@ -92,16 +92,43 @@ export default function MenuStage() {
   const [currentClickQtt, setCurrentClickQtt] = useState(0);
   const [showRetry, setShowRetry] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const [speed, setSpeed] = useState(0.025);
   const [title, setTitle] = useState("");
   const blurFilter = useMemo(() => new BlurFilter(2), []);
 
   const transition = (target: string) => {
-    setSpeed(1);
+    if (isTransitioning) return;
+
+    setIsTransitioning(true);
+
+    const duration = 1000;
+    const initialSpeed = 0.025;
+    // Target speed value
+    const targetSpeed = 1;
+    // Interval frequency (in milliseconds)
+    const intervalTime = 32; // Roughly 60 frames per second
+    // Number of steps to reach the target speed
+    const steps = duration / intervalTime;
+    // Increment for each step
+    const speedIncrement = (targetSpeed - initialSpeed) / steps;
+    let currentSpeed = initialSpeed;
+    const intervalId = setInterval(() => {
+      currentSpeed += speedIncrement;
+      
+      // Ensure that we don't exceed the target speed
+      if (currentSpeed >= targetSpeed) {
+        currentSpeed = targetSpeed;
+        clearInterval(intervalId); // Stop the interval once we reach the target speed
+      }
+
+      setSpeed(currentSpeed);
+    }, intervalTime);
+
     setTimeout(() => {
       window.location.replace(target);
-    }, 300);
+    }, 2000);
   };
 
   const hoverTitleUpdate = (newTitle: string) => {
@@ -148,7 +175,7 @@ export default function MenuStage() {
 
   return (
     <>
-      <div className="absolute inset-0 flex items-start justify-center z-30 pt-24 pointer-events-none">
+      {!isTransitioning && (<div className="absolute inset-0 flex items-start justify-center z-30 pt-24 pointer-events-none">
         <h1 className="text-6xl font-bold text-[#CBC9C9] pointer-events-auto">
           {Number(localStorage.getItem("stage")) <= 2 ? (
             title.length < 1 ? (
@@ -163,12 +190,12 @@ export default function MenuStage() {
             </div>
           )}
         </h1>
-      </div>
+      </div>)}
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <StarField speed={speed} />
-        {buildInteractions(currentLevel, transition, hoverTitleUpdate)}
+        {!isTransitioning && buildInteractions(currentLevel, transition, hoverTitleUpdate)}
       </Stage>
-      {Number(localStorage.getItem("stage")) == 3 && (
+      {!isTransitioning && Number(localStorage.getItem("stage")) == 3 && (
         <div
           className="absolute inset-0 flex items-end justify-center text-[#ECECEC]"
           onClick={() => {
@@ -204,7 +231,7 @@ export default function MenuStage() {
           </div>
         </div>
       )}
-      {percentage < 100 && (
+      {!isTransitioning && percentage < 100 && (
         <div className="absolute bottom-4 left-0 right-0 flex justify-center text-[#CBC9C9] text-3xl font-bold pb-16">
           {percentage}% COMPLETE
         </div>
