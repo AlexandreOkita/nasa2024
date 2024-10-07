@@ -140,7 +140,7 @@ export function Interaction(parameters: PoIParameters) {
           x: 0.5,
           y: 0.5,
         }}
-        scale={parameters.isGameFinished ? 1.3 : scaleMultiplier}
+        scale={parameters.isGameFinished ? 1.2 : scaleMultiplier}
         interactive={
           (parameters.isEnabled || parameters.isCompleted) &&
           !parameters.isGameFinished
