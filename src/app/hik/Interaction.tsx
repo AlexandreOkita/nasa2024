@@ -21,6 +21,8 @@ export type PoIParameters = {
   isGameFinished: boolean;
   onClick: (target: string) => void;
   onHover: (title: string) => void;
+  completedImage: string,
+  enabledImage: string
 };
 
 export function Interaction(parameters: PoIParameters) {
@@ -132,10 +134,10 @@ export function Interaction(parameters: PoIParameters) {
     <Container>
       <Sprite
         image={
-          parameters.isEnabled
-            ? "ToInteractStar.png"
+          (parameters.isEnabled || parameters.isGameFinished)
+            ? parameters.enabledImage
             : parameters.isCompleted
-            ? "AlreadyInteractedStar.png"
+            ? parameters.completedImage
             : "BlockedStar.png"
         }
         alpha={startAnimation ? alpha : 1.0}
@@ -145,7 +147,7 @@ export function Interaction(parameters: PoIParameters) {
           x: 0.5,
           y: 0.5,
         }}
-        scale={parameters.isGameFinished ? 1.3 : scaleMultiplier}
+        scale={scaleMultiplier * ((parameters.isEnabled || parameters.isCompleted) ? 0.5 : 1)}
         interactive={
           (parameters.isEnabled || parameters.isCompleted) &&
           !parameters.isGameFinished

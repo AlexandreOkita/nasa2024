@@ -30,6 +30,8 @@ const settings = [
     songPath: "cliff/cliff_harp_trim.wav",
     miniGamePage: "/cliff",
     title: "COSMIC CLIFFS",
+    imageCompleted: 'blueLocked.png',
+    imageEnabled: 'blueEnabled.png',
   },
   {
     x: 4.8,
@@ -38,6 +40,8 @@ const settings = [
     songPath: "sagittarius/sagittarius_grave_nasa_trim.wav",
     miniGamePage: "/sagittarius",
     title: "SAGITTARIUS C",
+    imageCompleted: 'redLocked.png',
+    imageEnabled: 'redEnabled.png',
   },
   {
     x: 6.5,
@@ -46,6 +50,8 @@ const settings = [
     songPath: "crab/crab_twilight_nasa_trim.wav",
     miniGamePage: "/crab",
     title: "CRAB NEBULA",
+    imageCompleted: 'yellowLocked.png',
+    imageEnabled: 'yellowEnabled.png',
   },
 ];
 
@@ -81,6 +87,8 @@ const buildInteractions = (
       isGameFinished={currentLevel > 2}
       onClick={callback}
       onHover={hoverCallback}
+      completedImage={set.imageCompleted}
+      enabledImage={set.imageEnabled}
     />
   ));
 
