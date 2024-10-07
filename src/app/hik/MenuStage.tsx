@@ -63,6 +63,7 @@ const buildInteractions = (
       isCompleted={index < currentLevel}
       isEnabled={index == currentLevel}
       miniGamePage={set.miniGamePage}
+      isGameFinished={currentLevel > 2}
       onClick={callback}
     />
   ));

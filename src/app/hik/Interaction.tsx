@@ -16,6 +16,7 @@ export type PoIParameters = {
   isCompleted: boolean;
   isEnabled: boolean;
   miniGamePage: string;
+  isGameFinished: boolean;
   onClick: (target: string) => void
 };
 
@@ -107,7 +108,7 @@ export function Interaction(parameters: PoIParameters) {
         y: 0.5,
       }}
       scale={scaleMultiplier}
-      interactive={parameters.isEnabled || parameters.isCompleted}
+      interactive={(parameters.isEnabled || parameters.isCompleted) && !parameters.isGameFinished}
       pointerover={handleMouseEnter}
       pointerout={handleMouseLeave}
       pointertap={handleClick} // Handle click event for redirection
