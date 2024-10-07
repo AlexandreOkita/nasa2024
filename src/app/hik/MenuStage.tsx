@@ -75,6 +75,7 @@ export default function MenuStage() {
   const currentLevel = Number(localStorage.getItem("stage"));
   const [currentClickQtt, setCurrentClickQtt] = useState(0);
   const [showRetry, setShowRetry] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const [speed, setSpeed] = useState(0.025);
   const blurFilter = useMemo(() => new BlurFilter(2), []);
@@ -97,12 +98,9 @@ export default function MenuStage() {
         preload: true,
       });
       sound.play("menu");
-    }
-  }, []);
-
-  useEffect(() => {
-    if (Number(localStorage.getItem("stage")) == 3) {
-      if (!sound.isPlaying()) {
+    } else {
+      if (!isPlaying) {
+        setIsPlaying(true);
         sound.add("final", {
           url: "musica_nasa.wav", // Add your sound file here
           loop: false, // Set sound to loop
@@ -111,7 +109,19 @@ export default function MenuStage() {
         sound.play("final");
       }
     }
-  });
+  }, []);
+
+  // useEffect(() => {
+  //   if (Number(localStorage.getItem("stage")) == 3 && !isPlaying) {
+  //     setIsPlaying(true);
+  //     sound.add("final", {
+  //       url: "musica_nasa.wav", // Add your sound file here
+  //       loop: false, // Set sound to loop
+  //       preload: true,
+  //     });
+  //     sound.play("final");
+  //   }
+  // }, []);
 
   return (
     <>
