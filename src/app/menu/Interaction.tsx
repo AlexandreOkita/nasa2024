@@ -129,7 +129,7 @@ export function Interaction(parameters: PoIParameters) {
       const alphaValue =
         0.8 + 0.5 * Math.sin(frequency.current * time + phaseOffset.current);
       setAlpha(alphaValue);
-      const newScale = Math.min(finalScale + delta * 0.005, 1.3);
+      const newScale = Math.min(finalScale + delta * 0.005, 1.2);
       setFinalScale(newScale);
     }
   });
