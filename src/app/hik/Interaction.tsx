@@ -29,10 +29,11 @@ export function Interaction(parameters: PoIParameters) {
   const [scaleMultiplier, setScaleMultiplier] = useState(initialScale);
   const [startAnimation, setStartAnimation] = useState(false);
   const [alpha, setAlpha] = useState(1.0);
+  const [finalScale, setFinalScale] = useState(0.7);
 
   // Random frequency and phase offset
   const frequency = useRef(Math.random() * 0.005); // Random frequency between 0.001 and 0.006
-  const phaseOffset = useRef(Math.random() * Math.PI * 2);  // Random phase offset between 0 and 2π
+  const phaseOffset = useRef(Math.random() * Math.PI * 2); // Random phase offset between 0 and 2π
 
   // const fadeInterval = 500; // Duration for fade (in ms)
   // const fadeInProgress = useRef(false); // To track if fade-in is in progress
@@ -125,8 +126,11 @@ export function Interaction(parameters: PoIParameters) {
   useTick((delta) => {
     if (startAnimation) {
       const time = performance.now();
-      const alphaValue = 0.5 + 0.5 * Math.sin(frequency.current * time + phaseOffset.current);
+      const alphaValue =
+        0.8 + 0.5 * Math.sin(frequency.current * time + phaseOffset.current);
       setAlpha(alphaValue);
+      const newScale = Math.min(finalScale + delta * 0.005, 1.3);
+      setFinalScale(newScale);
     }
   });
 
@@ -147,7 +151,7 @@ export function Interaction(parameters: PoIParameters) {
           x: 0.5,
           y: 0.5,
         }}
-        scale={scaleMultiplier * ((parameters.isEnabled || parameters.isCompleted) ? 0.5 : 1)}
+        scale={(parameters.isGameFinished ? finalScale : scaleMultiplier) * ((parameters.isEnabled || parameters.isCompleted) ? 0.5 : 1)}
         interactive={
           (parameters.isEnabled || parameters.isCompleted) &&
           !parameters.isGameFinished

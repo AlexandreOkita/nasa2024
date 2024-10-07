@@ -60,9 +60,9 @@ const getAnimationTime = (index: number) => {
     case 0:
       return 2000;
     case 1:
-      return 10000;
+      return 11000;
     case 2:
-      return 22000;
+      return 19000;
     default:
       return 50000;
   }
@@ -124,7 +124,7 @@ export default function MenuStage() {
     let currentSpeed = initialSpeed;
     const intervalId = setInterval(() => {
       currentSpeed += speedIncrement;
-      
+
       // Ensure that we don't exceed the target speed
       if (currentSpeed >= targetSpeed) {
         currentSpeed = targetSpeed;
@@ -183,25 +183,28 @@ export default function MenuStage() {
 
   return (
     <>
-      {!isTransitioning && (<div className="absolute inset-0 flex items-start justify-center z-30 pt-24 pointer-events-none">
-        <h1 className="text-6xl font-bold text-[#CBC9C9] pointer-events-auto">
-          {Number(localStorage.getItem("stage")) <= 2 ? (
-            title.length < 1 ? (
-              "EXPLORE THE STARS"
+      {!isTransitioning && (
+        <div className="absolute inset-0 flex items-start justify-center z-30 pt-24 pointer-events-none">
+          <h1 className="text-6xl font-bold text-[#CBC9C9] pointer-events-auto">
+            {Number(localStorage.getItem("stage")) <= 2 ? (
+              title.length < 1 ? (
+                "EXPLORE THE STARS"
+              ) : (
+                title
+              )
             ) : (
-              title
-            )
-          ) : (
-            <div className="flex justify-center flex-col items-center text-[#CBC9C9]">
-              <div>THE UNIVERSE SYMPHONY</div>
-              <div className="text-3xl mt-4">IS COMPLETED</div>
-            </div>
-          )}
-        </h1>
-      </div>)}
+              <div className="flex justify-center flex-col items-center text-[#CBC9C9]">
+                <div>THE UNIVERSE SYMPHONY</div>
+                <div className="text-3xl mt-4">IS COMPLETED</div>
+              </div>
+            )}
+          </h1>
+        </div>
+      )}
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <StarField speed={speed} />
-        {!isTransitioning && buildInteractions(currentLevel, transition, hoverTitleUpdate)}
+        {!isTransitioning &&
+          buildInteractions(currentLevel, transition, hoverTitleUpdate)}
       </Stage>
       {!isTransitioning && Number(localStorage.getItem("stage")) == 3 && (
         <div

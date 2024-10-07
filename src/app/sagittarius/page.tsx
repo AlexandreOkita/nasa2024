@@ -9,14 +9,14 @@ import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 
 const lessons = [
-  "The stunning 50 light-years portrait of the dense center of our galaxy, the Milky Way, launches new mysteries to be inquired about, especially arround the protostars",
+  "The stunning 50 light-years portrait of the dense center of our galaxy, the Milky Way, give a new perspective about the protostars and launches new mysteries around yet unidentified objects",
 ];
 
 const answers = {
   correct:
     "Wow, you really know about our galaxy! An estimated 500,000 stars shine in this image of the Sagittarius C (Sgr C) region.",
   error:
-    "You're right, the universe is indeed full of stars. But it was estimated only 500,000 stars in this image of the Sagittarius C (Sgr C) region.",
+    "Close one! But it was estimated about 500,000 stars in this image of the Sagittarius C (Sgr C) region.",
 };
 
 const question = "Can you estimate how many stars are present in the picture?";
