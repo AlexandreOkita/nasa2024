@@ -104,14 +104,16 @@ export default function MenuStage() {
     }
   });
 
+  const percentage = Math.round((currentLevel/3) * 100)
+
   return (
     <>
       <div className="absolute inset-0 flex items-start justify-center z-30 pt-24 pointer-events-none">
-        <h1 className="text-6xl font-bold text-[#ECECEC] pointer-events-auto">
+        <h1 className="text-6xl font-bold text-[#CBC9C9] pointer-events-auto">
           {Number(localStorage.getItem("stage")) <= 2 ? (
             settings[Number(localStorage.getItem("stage"))].title
           ) : (
-            <div className="flex justify-center flex-col items-center">
+            <div className="flex justify-center flex-col items-center text-[#CBC9C9]">
               <div>THE UNIVERSE SYMPHONY</div>
               <div className="text-3xl mt-4">IS COMPLETED</div>
             </div>
@@ -142,6 +144,9 @@ export default function MenuStage() {
           </div>
         </div>
       )}
+      <div className="absolute bottom-4 left-0 right-0 flex justify-center text-[#CBC9C9] text-3xl font-bold pb-16">
+        {percentage}% COMPLETE
+      </div>
     </>
   );
 }

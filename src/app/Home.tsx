@@ -78,7 +78,7 @@ export default function Home() {
         <StarField speed={speed} />
       </Stage>
       <div
-        className="absolute inset-0 flex h-screen items-center justify-center w-full flex-col px-4 font-mono text-white" //bg-slate-950
+        className="absolute inset-0 flex h-screen items-center justify-center w-full flex-col px-4 font-mono text-[#D4D2D2]" //bg-slate-950
         style={{ zIndex: 10 }} // Add higher z-index
         onClick={() => setLessonStarted(true)}
       >
@@ -92,10 +92,10 @@ export default function Home() {
                 style={{ height: "50vh" }}
               />
               <br/><br/><br/>
-              <p className="mb-2 font-squadaone text-6xl">
+              <p className="mb-2 font-squadaone text-6xl text-[#CBC9C9]">
                 THE UNIVERSE SYMPHONY
               </p>
-              <div className="mt-2 px-4 py-2 font-alata text-[#D4D2D2] text-3xl font-bold">
+              <div className="mt-2 px-4 py-2 font-alata text-[#CBC9C9] text-3xl font-bold">
                 TAP TO START
               </div>
             </div>
