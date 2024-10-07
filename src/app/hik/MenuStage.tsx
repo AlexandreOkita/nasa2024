@@ -15,10 +15,7 @@ const gridSetting = {
   cols: 10,
 };
 
-const lessons = [
-  "Through the lenses of James Webb, we were able to observe galaxies farther than ever before, revealing a vast universe and a perfect harmony.",
-  "Even though it is retiring, its melodies will continue to echo through history forever.",
-];
+const FINAL_TEXT = "Now you can listen to the full universe symphony";
 
 const mapCoordinateX = (x: number) =>
   x * (window.innerWidth / gridSetting.cols);
@@ -32,7 +29,7 @@ const settings = [
     songName: "first",
     songPath: "cliff/cliff_harp_trim.wav",
     miniGamePage: "/cliff",
-    title: "COSMIC CLIFFS"
+    title: "COSMIC CLIFFS",
   },
   {
     x: 4.8,
@@ -40,7 +37,7 @@ const settings = [
     songName: "second",
     songPath: "sagittarius/sagittarius_grave_nasa_trim.wav",
     miniGamePage: "/sagittarius",
-    title: "SAGITTARIUS C"
+    title: "SAGITTARIUS C",
   },
   {
     x: 6.5,
@@ -48,11 +45,14 @@ const settings = [
     songName: "third",
     songPath: "crab/crab_twilight_nasa_trim.wav",
     miniGamePage: "/crab",
-    title: "CRAB NEBULA"
+    title: "CRAB NEBULA",
   },
 ];
 
-const buildInteractions = (currentLevel: number, callback: (target: string) => void) => {
+const buildInteractions = (
+  currentLevel: number,
+  callback: (target: string) => void
+) => {
   const buttons = settings.map((set, index) => (
     <Interaction
       key={index}
@@ -80,8 +80,8 @@ export default function MenuStage() {
     setSpeed(1);
     setTimeout(() => {
       window.location.replace(target);
-    }, 2000)
-  }
+    }, 2000);
+  };
 
   useEffect(() => {
     if (Number(localStorage.getItem("stage")) == 3) {
@@ -97,9 +97,16 @@ export default function MenuStage() {
   return (
     <>
       <div className="absolute inset-0 flex items-start justify-center z-30 pt-24 pointer-events-none">
-        <h1 className="text-6xl font-bold text-[#ECECEC] pointer-events-auto">{
-        Number(localStorage.getItem("stage")) <= 2 ? settings[Number(localStorage.getItem("stage"))].title : "Qualquer coisa"
-        }</h1>
+        <h1 className="text-6xl font-bold text-[#ECECEC] pointer-events-auto">
+          {Number(localStorage.getItem("stage")) <= 2 ? (
+            settings[Number(localStorage.getItem("stage"))].title
+          ) : (
+            <div className="flex justify-center flex-col items-center">
+              <div>THE UNIVERSE SYMPHONY</div>
+              <div className="text-3xl mt-4">IS COMPLETE</div>
+            </div>
+          )}
+        </h1>
       </div>
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <StarField speed={speed} />
@@ -114,7 +121,13 @@ export default function MenuStage() {
         >
           <div className="z-20 w-full h-auto bg-gradient-to-t from-[rgba(0,0,0,0.8)] via-[rgba(0,0,0,0.5)] to-transparent flex items-end justify-center px-16 pb-8">
             <div className="text-center">
-              <TextGenerateEffect words={lessons[currentClickQtt]} />
+              <TextGenerateEffect words={FINAL_TEXT} />
+              <div className="w-[60vh] h-[110px] overflow-hidden rounded-2xl">
+                <img
+                  src="gif-music.gif"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
