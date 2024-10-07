@@ -92,7 +92,7 @@ export default function Home() {
               <p className="mb-2 font-squadaone text-6xl text-[#CBC9C9]">
                 THE UNIVERSE SYMPHONY
               </p>
-              <div className="mt-2 px-4 py-2 font-alata text-[#CBC9C9] text-3xl font-bold">
+              <div className="mt-2 px-4 py-2 font-alata text-[#CBC9C9] text-3xl">
                 TAP TO START
               </div>
             </div>
