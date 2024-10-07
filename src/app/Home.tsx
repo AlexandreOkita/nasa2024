@@ -23,9 +23,9 @@ export default function Home() {
   }, []);
 
   const lessons = [
-    "January 20, 2040",
-    "After 18 years of tireless work and countless contributions to science, James Webb is ending its mission and will receive its well-deserved rest amidst the apparent silence of the universe.",
-    "To remember and celebrate its work, let’s listen to some of its first notes.",
+    "October, 2024",
+    "Two years ago, the maestro James Webb Telescope was launched into orbit to advance the boundaries of the human knowledge and already has revealed so many pieces of the Universe Symphony for us.",
+    "Let's explore the stars and find some of these melodies.",
   ];
 
   const [lessonStarted, setLessonStarted] = useState(false);
