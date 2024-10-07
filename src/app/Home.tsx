@@ -22,6 +22,7 @@ export default function Home() {
 
   const lessons = [
     "October, 2024",
+    "October, 2024",
     "Two years ago, the maestro James Webb Telescope was launched into orbit to advance the boundaries of the human knowledge and already has revealed so many pieces of the Universe Symphony for us.",
     "Let's explore the stars and find some of these melodies.",
   ];
@@ -41,10 +42,10 @@ export default function Home() {
 
   useEffect(() => {
     const setClickState = () => {
-      if (clickQtt === 2) {
+      if (clickQtt === 3) {
         window.location.replace("/hik");
       }
-      if (clickQtt < lessons.length && clickQtt < 2) {
+      if (clickQtt < lessons.length && clickQtt < 3) {
         setClickQtt((prev) => prev + 1);
       }
     };
@@ -88,7 +89,9 @@ export default function Home() {
                 className="mb-4"
                 style={{ height: "50vh" }}
               />
-              <br/><br/><br/>
+              <br />
+              <br />
+              <br />
               <p className="mb-2 font-squadaone text-6xl text-[#CBC9C9]">
                 THE UNIVERSE SYMPHONY
               </p>
