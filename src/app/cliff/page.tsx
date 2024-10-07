@@ -8,7 +8,7 @@ import { ChevronsRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const lessons = [
-  "To start our journey across the amazing James Webb discoveries we will take a look at the beautiful Cosmic Cliffs",
+  "To start our journey across the amazing James Webb discoveries, we will take a look at the beautiful Cosmic Cliffs",
   "The image above is retrieved from another great humanity friend, the Hubble Telescope,",
   "and it captures the star-forming region NGC 3324 in Carina Nebula",
   "Try to sweep the mouse on the image to reveal some details that were invisible to us before James Webb",
