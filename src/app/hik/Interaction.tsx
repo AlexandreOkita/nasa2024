@@ -7,11 +7,12 @@ import { TextStyle } from 'pixi.js';
 import { sound } from "@pixi/sound";
 import { param } from "framer-motion/client";
 
-const initialScale = 0.6
+const initialScale = 0.6;
 
 export type PoIParameters = {
   x: number;
   y: number;
+  finalAnimationTime: number;
   songName: string;
   songPath: string;
   isCompleted: boolean;
@@ -24,6 +25,8 @@ export type PoIParameters = {
 
 export function Interaction(parameters: PoIParameters) {
   const [scaleMultiplier, setScaleMultiplier] = useState(initialScale);
+  const [startAnimation, setStartAnimation] = useState(false);
+  const [alpha, setAlpha] = useState(1.0);
 
   // const fadeInterval = 500; // Duration for fade (in ms)
   // const fadeInProgress = useRef(false); // To track if fade-in is in progress
@@ -36,6 +39,16 @@ export function Interaction(parameters: PoIParameters) {
       preload: true,
     });
   }, []);
+
+  useEffect(() => {
+    const timer1 = setTimeout(() => {
+      setStartAnimation(true);
+    }, parameters.finalAnimationTime);
+
+    return () => {
+      clearTimeout(timer1);
+    };
+  });
 
   const fadeSound = (targetVolume: number, duration: number) => {
     const initialVolume = sound.volume(parameters.songName);
@@ -80,7 +93,7 @@ export function Interaction(parameters: PoIParameters) {
   const handleMouseLeave = () => {
     if (parameters.isEnabled || parameters.isCompleted) {
       // if (parameters.isEnabled) {
-        setScaleMultiplier(initialScale); // Reset scale when not hovering
+      setScaleMultiplier(initialScale); // Reset scale when not hovering
       // }
       sound.stop(parameters.songName);
       parameters.onHover("");
@@ -101,11 +114,24 @@ export function Interaction(parameters: PoIParameters) {
     }
   };
 
+  useTick((delta) => {
+    if (startAnimation) {
+      const alpha = 0.5 + 0.5 * Math.sin(performance.now() / 500);
+      setAlpha(alpha);
+    }
+  });
+
   return (
     <Container>
       <Sprite
-        image={(parameters.isEnabled ? "ToInteractStar.png" : (parameters.isCompleted ? "AlreadyInteractedStar.png" : "BlockedStar.png"))}
-        alpha={(parameters.isEnabled || parameters.isCompleted) ? 1.0 : 1.0}
+        image={
+          parameters.isEnabled
+            ? "ToInteractStar.png"
+            : parameters.isCompleted
+            ? "AlreadyInteractedStar.png"
+            : "BlockedStar.png"
+        }
+        alpha={startAnimation ? alpha : 1.0}
         x={parameters.x}
         y={parameters.y}
         anchor={{
@@ -113,7 +139,10 @@ export function Interaction(parameters: PoIParameters) {
           y: 0.5,
         }}
         scale={scaleMultiplier}
-        interactive={(parameters.isEnabled || parameters.isCompleted) && !parameters.isGameFinished}
+        interactive={
+          (parameters.isEnabled || parameters.isCompleted) &&
+          !parameters.isGameFinished
+        }
         pointerover={handleMouseEnter}
         pointerout={handleMouseLeave}
         pointertap={handleClick} // Handle click event for redirection

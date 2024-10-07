@@ -49,6 +49,19 @@ const settings = [
   },
 ];
 
+const getAnimationTime = (index: number) => {
+  switch (index) {
+    case 0:
+      return 2000;
+    case 1:
+      return 10000;
+    case 2:
+      return 22000;
+    default:
+      return 50000;
+  }
+};
+
 const buildInteractions = (
   currentLevel: number,
   callback: (target: string) => void,
@@ -56,6 +69,7 @@ const buildInteractions = (
 ) => {
   const buttons = settings.map((set, index) => (
     <Interaction
+      finalAnimationTime={getAnimationTime(index)}
       key={index}
       x={mapCoordinateX(set.x)}
       y={mapCoordinateY(set.y)}
@@ -76,6 +90,8 @@ const buildInteractions = (
 export default function MenuStage() {
   const currentLevel = Number(localStorage.getItem("stage"));
   const [currentClickQtt, setCurrentClickQtt] = useState(0);
+  const [showRetry, setShowRetry] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const [speed, setSpeed] = useState(0.025);
   const [title, setTitle] = useState("")
@@ -86,40 +102,58 @@ export default function MenuStage() {
     setTimeout(() => {
       window.location.replace(target);
     }, 300);
-  }
+  };
 
   const hoverTitleUpdate = (newTitle: string) => {
     setTitle(newTitle)
   }
 
   useEffect(() => {
-    sound.add('menu', {
-      url: "menu/pad-space-travel-hyperdrive-engine-humming-235901.wav", // Add your sound file here
-      loop: true, // Set sound to loop
-      preload: true,
-    });
-    sound.play('menu');
-  }, []);
-
-  useEffect(() => {
-    if (Number(localStorage.getItem("stage")) == 3) {
-      sound.add("final", {
-        url: "musica_nasa.wav", // Add your sound file here
-        loop: false, // Set sound to loop
+    setTimeout(() => {
+      setShowRetry(true);
+    }, 5000);
+    if (currentLevel != 3) {
+      sound.add("menu", {
+        url: "menu/pad-space-travel-hyperdrive-engine-humming-235901.wav", // Add your sound file here
+        loop: true, // Set sound to loop
         preload: true,
       });
-      sound.play("final");
+      sound.play("menu");
+    } else {
+      if (!isPlaying) {
+        setIsPlaying(true);
+        sound.add("final", {
+          url: "musica_nasa.wav", // Add your sound file here
+          loop: false, // Set sound to loop
+          preload: true,
+        });
+        sound.play("final");
+      }
     }
-  });
+  }, []);
+
+  // useEffect(() => {
+  //   if (Number(localStorage.getItem("stage")) == 3 && !isPlaying) {
+  //     setIsPlaying(true);
+  //     sound.add("final", {
+  //       url: "musica_nasa.wav", // Add your sound file here
+  //       loop: false, // Set sound to loop
+  //       preload: true,
+  //     });
+  //     sound.play("final");
+  //   }
+  // }, []);
+
+  const percentage = Math.round((currentLevel/3) * 100)
 
   return (
     <>
       <div className="absolute inset-0 flex items-start justify-center z-30 pt-24 pointer-events-none">
-        <h1 className="text-6xl font-bold text-[#ECECEC] pointer-events-auto">
+        <h1 className="text-6xl font-bold text-[#CBC9C9] pointer-events-auto">
           {Number(localStorage.getItem("stage")) <= 2 ? (
             title.length < 1 ? "EXPLORE THE STARS" : title
           ) : (
-            <div className="flex justify-center flex-col items-center">
+            <div className="flex justify-center flex-col items-center text-[#CBC9C9]">
               <div>THE UNIVERSE SYMPHONY</div>
               <div className="text-3xl mt-4">IS COMPLETED</div>
             </div>
@@ -139,17 +173,36 @@ export default function MenuStage() {
         >
           <div className="z-20 w-full h-auto bg-gradient-to-t from-[rgba(0,0,0,0.8)] via-[rgba(0,0,0,0.5)] to-transparent flex items-end justify-center px-16 pb-8">
             <div className="text-center">
-              <TextGenerateEffect words={FINAL_TEXT} />
-              <div className="w-[60vh] h-[110px] overflow-hidden rounded-2xl">
-                <img
-                  src="gif-music.gif"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+              {/* <TextGenerateEffect words={FINAL_TEXT} /> */}
+              {showRetry ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    localStorage.setItem("stage", "0");
+                    window.location.replace("/");
+                  }}
+                  className="h-[110px] text-3xl font-alata text-[#D4D2D2]"
+                >
+                  RETRY
+                </button>
+              ) : (
+                <>
+                  <TextGenerateEffect words={FINAL_TEXT} />
+                  <div className="w-[60vh] h-[110px] overflow-hidden rounded-2xl">
+                    <img
+                      src="gif-music.gif"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
       )}
+      <div className="absolute bottom-4 left-0 right-0 flex justify-center text-[#CBC9C9] text-3xl font-bold pb-16">
+        {percentage}% COMPLETE
+      </div>
     </>
   );
 }

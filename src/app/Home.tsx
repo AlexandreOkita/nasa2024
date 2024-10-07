@@ -1,7 +1,5 @@
 "use client";
 
-import { StarsBackground } from "../components/ui/stars-background";
-import { ShootingStars } from "../components/ui/shooting-stars";
 import { useEffect, useState } from "react";
 import LessonChapter from "../components/ui/lessonChapter";
 
@@ -14,18 +12,18 @@ export default function Home() {
   localStorage.setItem("stage", "0");
 
   useEffect(() => {
-    sound.add('home', {
+    sound.add("home", {
       url: "home/piano_nasa.wav", // Add your sound file here
       loop: true, // Set sound to loop
       preload: true,
     });
-    sound.play('home');
+    sound.play("home");
   }, []);
 
   const lessons = [
-    "January 20, 2040",
-    "After 18 years of tireless work and countless contributions to science, James Webb is ending its mission and will receive its well-deserved rest amidst the apparent silence of the universe.",
-    "To remember and celebrate its work, let’s listen to some of its first notes.",
+    "October, 2024",
+    "Two years ago, the maestro James Webb Telescope was launched into orbit to advance the boundaries of the human knowledge and already has revealed so many pieces of the Universe Symphony for us.",
+    "Let's explore the stars and find some of these melodies.",
   ];
 
   const [lessonStarted, setLessonStarted] = useState(false);
@@ -33,6 +31,7 @@ export default function Home() {
   const [clickable, setClickable] = useState(false);
 
   useEffect(() => {
+    localStorage.setItem("stage", "0");
     const timer = setTimeout(() => {
       setClickable(true);
     }, 700);
@@ -68,9 +67,7 @@ export default function Home() {
     };
   }, [clickable]);
 
-  console.log("clickQtt ==>", clickQtt);
-
-  const speed = 0.025
+  const speed = 0.025;
 
   return (
     <>
@@ -78,7 +75,7 @@ export default function Home() {
         <StarField speed={speed} />
       </Stage>
       <div
-        className="absolute inset-0 flex h-screen items-center justify-center w-full flex-col px-4 font-mono text-white" //bg-slate-950
+        className="absolute inset-0 flex h-screen items-center justify-center w-full flex-col px-4 font-mono text-[#D4D2D2]" //bg-slate-950
         style={{ zIndex: 10 }} // Add higher z-index
         onClick={() => setLessonStarted(true)}
       >
@@ -92,10 +89,10 @@ export default function Home() {
                 style={{ height: "50vh" }}
               />
               <br/><br/><br/>
-              <p className="mb-2 font-squadaone text-6xl">
+              <p className="mb-2 font-squadaone text-6xl text-[#CBC9C9]">
                 THE UNIVERSE SYMPHONY
               </p>
-              <div className="mt-2 px-4 py-2 font-alata text-[#D4D2D2] text-3xl font-bold">
+              <div className="mt-2 px-4 py-2 font-alata text-[#CBC9C9] text-3xl font-bold">
                 TAP TO START
               </div>
             </div>
