@@ -24,7 +24,7 @@ const mapCoordinateY = (y: number) =>
 
 const settings = [
   {
-    x: 3,
+    x: 2,
     y: 2,
     songName: "first",
     songPath: "cliff/cliff_harp_trim.wav",
@@ -35,7 +35,7 @@ const settings = [
   },
   {
     x: 4.8,
-    y: 4.1,
+    y: 3.5,
     songName: "second",
     songPath: "sagittarius/sagittarius_grave_nasa_trim.wav",
     miniGamePage: "/sagittarius",
@@ -44,7 +44,7 @@ const settings = [
     imageEnabled: 'redEnabled.png',
   },
   {
-    x: 6.5,
+    x: 8,
     y: 2.5,
     songName: "third",
     songPath: "crab/crab_twilight_nasa_trim.wav",
