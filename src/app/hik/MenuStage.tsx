@@ -111,7 +111,7 @@ export default function MenuStage() {
   useEffect(() => {
     setTimeout(() => {
       setShowRetry(true);
-    }, 5000);
+    }, 1000 * 43);
     if (currentLevel != 3) {
       sound.add("menu", {
         url: "menu/pad-space-travel-hyperdrive-engine-humming-235901.wav", // Add your sound file here
