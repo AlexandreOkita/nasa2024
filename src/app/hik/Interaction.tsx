@@ -28,6 +28,10 @@ export function Interaction(parameters: PoIParameters) {
   const [startAnimation, setStartAnimation] = useState(false);
   const [alpha, setAlpha] = useState(1.0);
 
+  // Random frequency and phase offset
+  const frequency = useRef(Math.random() * 0.005); // Random frequency between 0.001 and 0.006
+  const phaseOffset = useRef(Math.random() * Math.PI * 2);  // Random phase offset between 0 and 2π
+
   // const fadeInterval = 500; // Duration for fade (in ms)
   // const fadeInProgress = useRef(false); // To track if fade-in is in progress
   // const fadeOutProgress = useRef(false);
@@ -118,8 +122,9 @@ export function Interaction(parameters: PoIParameters) {
 
   useTick((delta) => {
     if (startAnimation) {
-      const alpha = 0.5 + 0.5 * Math.sin(performance.now() / 500);
-      setAlpha(alpha);
+      const time = performance.now();
+      const alphaValue = 0.5 + 0.5 * Math.sin(frequency.current * time + phaseOffset.current);
+      setAlpha(alphaValue);
     }
   });
 
