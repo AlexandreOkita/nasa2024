@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 
-import { Sprite, Text, Container } from "@pixi/react";
+import { Sprite, Text, Container, useTick } from "@pixi/react";
 import { TextStyle } from 'pixi.js';
 import { sound } from "@pixi/sound";
 import { param } from "framer-motion/client";
