@@ -4,14 +4,16 @@ import { useState, useEffect, useRef } from "react";
 
 import { Sprite, useTick } from "@pixi/react";
 import { sound } from "@pixi/sound";
+import { param } from "framer-motion/client";
 
-const initialScale = 0.4
+const initialScale = 0.6
 
 export type PoIParameters = {
   x: number;
   y: number;
   songName: string;
   songPath: string;
+  isCompleted: boolean;
   isEnabled: boolean;
   miniGamePage: string;
   onClick: (target: string) => void
@@ -55,10 +57,12 @@ export function Interaction(parameters: PoIParameters) {
   };
 
   const handleMouseEnter = () => {
-    if (!parameters.isEnabled) return;
-
-    setScaleMultiplier(initialScale * 1.5); // Scale up on hover
-    sound.play(parameters.songName);
+    if (parameters.isEnabled || parameters.isCompleted) {
+      // if (parameters.isEnabled) {
+        setScaleMultiplier(initialScale * 1.5); // Scale up on hover
+      // }
+      sound.play(parameters.songName);
+    }
 
     // if (fadeOutProgress.current) {
     //   fadeOutProgress.current = false; // Stop any ongoing fade-out
@@ -70,10 +74,12 @@ export function Interaction(parameters: PoIParameters) {
   };
 
   const handleMouseLeave = () => {
-    if (!parameters.isEnabled) return;
-
-    setScaleMultiplier(initialScale); // Reset scale when not hovering
-    sound.stop(parameters.songName);
+    if (parameters.isEnabled || parameters.isCompleted) {
+      // if (parameters.isEnabled) {
+        setScaleMultiplier(initialScale); // Reset scale when not hovering
+      // }
+      sound.stop(parameters.songName);
+    }
 
     // if (fadeInProgress.current) {
     //   fadeInProgress.current = false; // Stop any ongoing fade-in
@@ -84,7 +90,7 @@ export function Interaction(parameters: PoIParameters) {
   };
 
   const handleClick = () => {
-    if (parameters.isEnabled) {
+    if (parameters.isEnabled || parameters.isCompleted) {
       parameters.onClick(parameters.miniGamePage);
       // window.location.replace(parameters.miniGamePage);
     }
@@ -92,8 +98,8 @@ export function Interaction(parameters: PoIParameters) {
 
   return (
     <Sprite
-      image={"ClickableStar.png"}
-      alpha={parameters.isEnabled ? 1.0 : 0.4}
+      image={(parameters.isEnabled ? "ToInteractStar.png" : (parameters.isCompleted ? "AlreadyInteractedStar.png" : "BlockedStar.png"))}
+      alpha={(parameters.isEnabled || parameters.isCompleted) ? 1.0 : 1.0}
       x={parameters.x}
       y={parameters.y}
       anchor={{
@@ -101,7 +107,7 @@ export function Interaction(parameters: PoIParameters) {
         y: 0.5,
       }}
       scale={scaleMultiplier}
-      interactive={parameters.isEnabled}
+      interactive={parameters.isEnabled || parameters.isCompleted}
       pointerover={handleMouseEnter}
       pointerout={handleMouseLeave}
       pointertap={handleClick} // Handle click event for redirection
