@@ -14,12 +14,12 @@ export default function Home() {
   localStorage.setItem("stage", "0");
 
   useEffect(() => {
-    sound.add('home', {
+    sound.add("home", {
       url: "home/piano_nasa.wav", // Add your sound file here
       loop: true, // Set sound to loop
       preload: true,
     });
-    sound.play('home');
+    sound.play("home");
   }, []);
 
   const lessons = [
@@ -33,6 +33,7 @@ export default function Home() {
   const [clickable, setClickable] = useState(false);
 
   useEffect(() => {
+    localStorage.setItem("stage", "0");
     const timer = setTimeout(() => {
       setClickable(true);
     }, 700);
@@ -68,9 +69,7 @@ export default function Home() {
     };
   }, [clickable]);
 
-  console.log("clickQtt ==>", clickQtt);
-
-  const speed = 0.025
+  const speed = 0.025;
 
   return (
     <>
@@ -91,7 +90,9 @@ export default function Home() {
                 className="mb-4"
                 style={{ height: "50vh" }}
               />
-              <br/><br/><br/>
+              <br />
+              <br />
+              <br />
               <p className="mb-2 font-squadaone text-6xl">
                 THE UNIVERSE SYMPHONY
               </p>
